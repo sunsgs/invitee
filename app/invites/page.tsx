@@ -1,19 +1,11 @@
 "use client";
 
-import { CreateInviteModal } from "@/components/create-invite-modal";
 import { Button } from "@/components/ui/button";
-import { InviteFormData } from "@/validation/schema";
 import { PlusCircle } from "lucide-react";
 import { useState } from "react";
 
 export default function Page() {
   const [modalOpen, setModalOpen] = useState(false);
-
-  const handleCreate = async (data: InviteFormData) => {
-    // Send data to your API route or directly to Turso here.
-    console.log("New invite data:", data);
-    setModalOpen(false);
-  };
 
   return (
     <div className="grid grid-cols-4">
@@ -26,11 +18,6 @@ export default function Page() {
         <PlusCircle className="mr-2" />
         Create Invite
       </Button>
-      <CreateInviteModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        onSubmit={handleCreate}
-      />
     </div>
   );
 }
