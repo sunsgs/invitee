@@ -3,8 +3,7 @@ import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
   plugins: [adminClient()],
-  baseURL:
-    process.env.NEXT_PUBLIC_BETTER_AUTH_URL || "https://invitee.vercel.app",
+  baseURL: process.env.NEXT_PUBLIC_APP_URL,
 });
 
 export const { signIn, signOut, useSession, signUp } = authClient;
