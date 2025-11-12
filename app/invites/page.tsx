@@ -1,23 +1,24 @@
-"use client";
+import ListInvites from "@/components/list-invites";
+import { db } from "@/db";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-import { Button } from "@/components/ui/button";
-import { PlusCircle } from "lucide-react";
-import { useState } from "react";
+export default async function Page() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-export default function Page() {
-  const [modalOpen, setModalOpen] = useState(false);
+  const userId = session?.user.id;
 
-  return (
-    <div className="grid grid-cols-4">
-      <Button
-        onClick={() => setModalOpen(true)}
-        variant="outline"
-        className="flex items-center justify-center border-dashed h-50 w-full rounded-lg"
-        aria-label="Create new invite"
-      >
-        <PlusCircle className="mr-2" />
-        Create Invite
-      </Button>
-    </div>
-  );
+  if (session && userId) {
+    const rawInvites = await db.query.invite.findMany({
+      where: (invite, { eq }) => eq(invite.creatorId, userId),
+    });
+
+    // Transform null to undefined
+    const invites = rawInvites;
+
+    console.log(invites);
+    return <ListInvites data={invites} />;
+  }
 }

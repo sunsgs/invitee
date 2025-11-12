@@ -1,0 +1,1 @@
+ALTER TABLE `invite` RENAME COLUMN "datestring" TO "date";

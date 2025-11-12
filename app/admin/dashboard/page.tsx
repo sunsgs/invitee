@@ -24,8 +24,6 @@ export default function Dashboard() {
           filterOperator: "eq",
         },
       });
-
-      console.log(users);
     }
 
     fetchUsers();

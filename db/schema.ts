@@ -82,19 +82,34 @@ export const verification = sqliteTable("verification", {
 
 export const invite = sqliteTable("invite", {
   id: text("id").primaryKey(),
-  title: text("title").notNull(),
-  invitee: text("invitee"),
-  datetime: integer("datetime", { mode: "timestamp_ms" }).notNull(), // combined date and time
-  location: text("location").notNull(),
-  description: text("description"),
-  maxGuests: integer("max_guests"),
+  title: text("title"),
+  name: text("name").notNull(), // required
+  date: integer("date", { mode: "timestamp_ms" }).notNull(), // stores milliseconds precision timestamp (Date object)
+  startTime: text("startTime"),
+  endTime: text("endTime"),
+  location: text("location"), // optional
+  description: text("description"), // optional
+  isMaxGuestsCountEnabled: integer("is_max_guests_count_enabled", {
+    mode: "boolean",
+  })
+    .default(false)
+    .notNull(),
+  isBabyCountEnabled: integer("is_baby_count_enabled", { mode: "boolean" })
+    .default(false)
+    .notNull(),
+  maxGuestsNumber: integer("max_guests"),
+  maxGuestsBabyNumber: integer("max_guests_baby"), // optional
+  rsvpRequired: integer("rsvp_required", { mode: "boolean" })
+    .default(false)
+    .notNull(),
+  bgColor: text("bg_color").notNull(),
+  fontValue: text("font_value").notNull(),
+  textColor: text("text_color").notNull(),
+  emoji: text("emoji"), // optional
+  emojiDensity: integer("emoji_density"), // optional
   creatorId: text("creator_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
-  status: text("status").default("draft").notNull(), // e.g. draft, sent, cancelled
-  rsvpRequired: integer("rsvp_required", { mode: "boolean" }).default(false),
-  inviteCode: text("invite_code").unique(),
-  reminderSent: integer("reminder_sent", { mode: "timestamp_ms" }),
   createdAt: integer("created_at", { mode: "timestamp_ms" })
     .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
     .notNull(),
@@ -125,4 +140,4 @@ export const rsvp = sqliteTable("rsvp", {
 // Type exports
 export type User = typeof user.$inferSelect;
 
-export const schema = { user, account, session, verification };
+export const schema = { user, account, session, verification, invite };

@@ -22,6 +22,125 @@
       "when": 1761920415097,
       "tag": "0002_steady_the_hood",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1762361132884,
+      "tag": "0003_chilly_charles_xavier",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1762361892362,
+      "tag": "0004_lumpy_red_hulk",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1762514728452,
+      "tag": "0005_short_maria_hill",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1762514777376,
+      "tag": "0006_cold_blizzard",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1762522289803,
+      "tag": "0007_lumpy_texas_twister",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1762522402825,
+      "tag": "0008_adorable_masked_marvel",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1762523889309,
+      "tag": "0009_nappy_bloodscream",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1762524052255,
+      "tag": "0010_friendly_ser_duncan",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "6",
+      "when": 1762524795879,
+      "tag": "0011_fat_zarek",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "6",
+      "when": 1762528475195,
+      "tag": "0012_bumpy_obadiah_stane",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "6",
+      "when": 1762877180802,
+      "tag": "0013_warm_scrambler",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "6",
+      "when": 1762877327057,
+      "tag": "0014_strange_wallop",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "6",
+      "when": 1762877697892,
+      "tag": "0015_premium_mastermind",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "6",
+      "when": 1762877822949,
+      "tag": "0016_graceful_jamie_braddock",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "6",
+      "when": 1762877868818,
+      "tag": "0017_short_tiger_shark",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "6",
+      "when": 1762957237281,
+      "tag": "0018_fresh_cannonball",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "6",
+      "when": 1762967261737,
+      "tag": "0019_early_arachne",
+      "breakpoints": true
     }
   ]
 }

@@ -37,7 +37,7 @@ export function FontAndColorPopover({
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className="gap-2 shadow-none rounded-none rounded-tl-md rounded-bl-md "
+          className="gap-2 shadow-none rounded-none rounded-tl-sm rounded-bl-sm py-6"
         >
           <Type className="h-4 w-4" />
           <span className="hidden sm:inline">Text Style</span>

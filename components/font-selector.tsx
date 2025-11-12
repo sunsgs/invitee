@@ -6,7 +6,6 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select";
 import { FONT_CATEGORIES, INVITATION_FONTS } from "@/lib/fonts-config";
 import { Type } from "lucide-react";
@@ -28,26 +27,29 @@ export function FontSelector({ value, onValueChange }: FontSelectorProps) {
   const selectedFont = INVITATION_FONTS.find((f) => f.value === value);
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex  gap-1">
       <Select value={value} onValueChange={onValueChange}>
-        <SelectTrigger className="bg-background shadow-none gap-2">
+        <SelectTrigger className="bg-background border-none shadow-none">
           <Type className="h-4 w-4 shrink-0" />
-          <SelectValue placeholder="Scegli font">
+          {/* <SelectValue placeholder="Scegli font" className="invisible">
             {selectedFont?.name}
-          </SelectValue>
+          </SelectValue> */}
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="mb-3 w-70">
           {/* Category Filter Buttons */}
-          <div className="flex flex-wrap gap-1 p-2 border-b">
+          <div className="flex f gap-1 p-2 border-b overflow-x-auto">
             {FONT_CATEGORIES.map((cat) => (
               <Button
+                size={"lg"}
                 key={cat.value}
                 variant={categoryFilter === cat.value ? "default" : "outline"}
-                size="sm"
                 onClick={() => setCategoryFilter(cat.value)}
-                className="h-7 text-xs"
+                className="rounded-full"
               >
-                {cat.label.split("(")[0].trim()}
+                <span className="text-sm">
+                  {" "}
+                  {cat.label.split("(")[0].trim()}
+                </span>
               </Button>
             ))}
           </div>
@@ -67,7 +69,7 @@ export function FontSelector({ value, onValueChange }: FontSelectorProps) {
                   >
                     {font.name}
                   </span>
-                  <span className="text-xs text-zinc-500">{font.preview}</span>
+                  <span className="">{font.preview}</span>
                 </div>
               </SelectItem>
             ))}

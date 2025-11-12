@@ -6,7 +6,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Minus, Plus, Smile } from "lucide-react";
+import { Minus, Plus, RulerDimensionLine } from "lucide-react";
 
 interface EmojiDensityControlProps {
   density: number;
@@ -37,12 +37,9 @@ export function EmojiDensityControl({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className="gap-2 shadow-none rounded-none rounded-tl-md rounded-bl-md"
-        >
-          <Smile className="h-4 w-4" />
-          <span className="hidden sm:inline">Emoji Density</span>
+        <Button variant="ghost" className="rounded-none">
+          <RulerDimensionLine className="h-4 w-4" />
+          {/* <span className="hidden sm:inline">Emoji Density</span> */}
           <span className="sm:hidden text-xs">{currentLevel?.label}</span>
         </Button>
       </PopoverTrigger>
@@ -56,11 +53,12 @@ export function EmojiDensityControl({
           </div>
 
           <div className="flex gap-1.5">
-            {[1, 2, 3, 4].map((level) => (
-              <div
-                key={level}
-                className={`flex-1 h-2 rounded-full transition-all ${
-                  level <= density ? "bg-primary" : "bg-accent"
+            {densityLevels.map((level) => (
+              <Button
+                onClick={() => onDensityChange(level.value)}
+                key={level.value}
+                className={`flex-1 h-4 rounded-full transition-all p-1 ${
+                  level.value <= density ? "bg-primary" : "bg-accent"
                 }`}
               />
             ))}

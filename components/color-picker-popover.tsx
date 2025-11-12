@@ -38,19 +38,20 @@ export function ColorPickerPopover({
       }}
     >
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className="gap-2 shadow-none rounded-none rounded-tl-md rounded-bl-md "
-        >
+        <Button variant="ghost" className="rounded-none">
           {icon}
-          <span className="hidden sm:inline">{label}</span>
+          {/* <span className="hidden sm:inline">{label}</span> */}
           <div
-            className="h-4 w-4 rounded border"
+            className="h-5 w-5 rounded-sm border"
             style={{ backgroundColor: color }}
           />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="end">
+      <PopoverContent
+        className="w-auto p-0 ml-2"
+        sideOffset={16}
+        align="center"
+      >
         <ColorPicker defaultValue={color} onChange={handleChange} />
       </PopoverContent>
     </Popover>

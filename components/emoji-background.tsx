@@ -131,6 +131,11 @@ export function EmojiBackground({
   // Detect screen size for responsive behavior
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -300,6 +305,13 @@ export function EmojiBackground({
     () => emojis.filter((e) => e.zIndex === "above"),
     [emojis]
   );
+
+  if (!mounted) {
+    // Return simplified version for SSR
+    return (
+      <div className="absolute inset-0" style={{ backgroundColor: bgColor }} />
+    );
+  }
 
   return (
     <>

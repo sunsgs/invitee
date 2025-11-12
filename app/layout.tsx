@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html className={allFontVariables}>
-      <body className={`${inter.variable} text-base antialiased`}>
+      <body className={`${inter.variable} font-sans antialiased`}>
         {" "}
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <Toaster richColors />
