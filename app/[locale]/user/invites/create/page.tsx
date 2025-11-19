@@ -1,5 +1,5 @@
 import InvitationBuilder from "@/components/invitation-builder";
 
 export default function Page() {
-  return <InvitationBuilder />;
+  return <InvitationBuilder inviteEmoji="😀" />;
 }

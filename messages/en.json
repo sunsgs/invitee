@@ -8,5 +8,8 @@
   },
   "HomePage": {
     "title": "Hello world!"
+  },
+  "PROFILE": {
+    "NAME": "Full name"
   }
 }

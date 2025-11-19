@@ -50,6 +50,13 @@ export const INVITATION_FONTS: FontOption[] = [
 
   // Display & Decorative
   {
+    name: "Bagel",
+    value: "bagel",
+    variable: "--font-bagel",
+    category: "display",
+    preview: "Bold & Striking",
+  },
+  {
     name: "Abril Fatface",
     value: "abril",
     variable: "--font-abril",

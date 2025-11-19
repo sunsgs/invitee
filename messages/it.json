@@ -1,0 +1,15 @@
+{
+  "SIGNUP": {
+    "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "User existing",
+    "PASSWORDS_NOT_MATCHING": "Passwords do not match"
+  },
+  "LOGIN": {
+    "INVALID_EMAIL_OR_PASSWORD": "Invalid email or password"
+  },
+  "HomePage": {
+    "title": "Hello world!"
+  },
+  "PROFILE": {
+    "NAME": "Nome completo"
+  }
+}

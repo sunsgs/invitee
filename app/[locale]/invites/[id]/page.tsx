@@ -1,5 +1,6 @@
 import { InvitationCard } from "@/components/invitation-card";
 import { db } from "@/db";
+import { notFound } from "next/navigation";
 
 export default async function Page({
   params,
@@ -45,5 +46,7 @@ export default async function Page({
         />
       </section>
     );
+  } else {
+    notFound();
   }
 }

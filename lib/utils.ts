@@ -86,3 +86,12 @@ export const isEventExpired = (
 
   return eventDate < now;
 };
+
+export function getInitials(fullName: string): string {
+  if (!fullName || fullName.trim() === "") {
+    return "";
+  }
+
+  const names = fullName.trim().split(/\s+/);
+  return names.map((name) => name.charAt(0).toUpperCase()).join("");
+}

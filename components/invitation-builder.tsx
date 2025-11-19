@@ -25,6 +25,7 @@ import {
   InviteFormData,
   inviteSchema,
 } from "@/validation/schema";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { FontSelector } from "./font-selector";
 import { NumberInputField } from "./number-inputs";
@@ -60,6 +61,7 @@ export default function InvitationBuilder({
   const [selectedEmojiUnicode, setSelectedEmojiUnicode] = useState<
     string | string[]
   >(inviteEmoji || "");
+  const router = useRouter();
 
   const [emojiDensity, setEmojiDensity] = useState(inviteEmojiDensity || 2);
 
@@ -199,7 +201,7 @@ export default function InvitationBuilder({
       } else {
         toast.success("Invite created successfully");
         // Optionally redirect to the edit page with the new ID
-        // window.location.href = `/invites/${result.id}`;
+        router.push("/user/invites");
       }
     } catch (error) {
       console.error("Error saving invitation:", error);
@@ -267,7 +269,6 @@ export default function InvitationBuilder({
             form="invitation-form"
             disabled={isSubmitting}
             size={"lg"}
-            className="px-4 py-6 cta"
             aria-label="Save"
             title="Save"
           >

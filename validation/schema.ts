@@ -2,51 +2,51 @@ import { invite } from "@/db/schema";
 import { createInsertSchema } from "drizzle-zod";
 import z from "zod";
 
-// Reusable password schema with minimum length validation
-const passwordSchema = z
-  .string()
-  .min(8, { message: "Password must be at least 8 characters long" });
+// // Reusable password schema with minimum length validation
+// const passwordSchema = z
+//   .string()
+//   .min(8, { message: "Password must be at least 8 characters long" });
 
-// Utility function to check if password and confirmPassword match
-const passwordMatch = (field: string) => (data: any) =>
-  data.password === data[field];
+// // Utility function to check if password and confirmPassword match
+// const passwordMatch = (field: string) => (data: any) =>
+//   data.password === data[field];
 
-// Login form schema
-export const LoginFormSchema = z
-  .object({
-    email: z.email({ message: "Invalid email address" }),
-    password: passwordSchema,
-  })
-  .strict();
+// // Login form schema
+// export const LoginFormSchema = z
+//   .object({
+//     email: z.email({ message: "Invalid email address" }),
+//     password: passwordSchema,
+//   })
+//   .strict();
 
-// Signup form schema with confirmPassword validation
-export const SignupFormSchema = z
-  .object({
-    email: z.email({ message: "Invalid email address" }),
-    name: z
-      .string()
-      .min(3, { message: "Name must be at least 3 characters long" }),
-    password: passwordSchema,
-    confirmPassword: z.string(),
-  })
-  .refine(passwordMatch("confirmPassword"), {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  })
-  .strict();
+// // Signup form schema with confirmPassword validation
+// export const SignupFormSchema = z
+//   .object({
+//     email: z.email({ message: "Invalid email address" }),
+//     name: z
+//       .string()
+//       .min(3, { message: "Name must be at least 3 characters long" }),
+//     password: passwordSchema,
+//     confirmPassword: z.string(),
+//   })
+//   .refine(passwordMatch("confirmPassword"), {
+//     message: "Passwords do not match",
+//     path: ["confirmPassword"],
+//   })
+//   .strict();
 
-// Change password schema with current password and confirmPassword validation
-export const ChangePasswordSchema = z
-  .object({
-    password: passwordSchema,
-    confirmPassword: z.string(),
-    currentPassword: passwordSchema,
-  })
-  .refine(passwordMatch("confirmPassword"), {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  })
-  .strict();
+// // Change password schema with current password and confirmPassword validation
+// export const ChangePasswordSchema = z
+//   .object({
+//     password: passwordSchema,
+//     confirmPassword: z.string(),
+//     currentPassword: passwordSchema,
+//   })
+//   .refine(passwordMatch("confirmPassword"), {
+//     message: "Passwords do not match",
+//     path: ["confirmPassword"],
+//   })
+//   .strict();
 
 // export const inviteSchema = z.object({
 //   id: z.string().optional(),
@@ -84,6 +84,12 @@ export const ChangePasswordSchema = z
 //   }
 // );
 
+export const profileSchema = z
+  .object({
+    name: z.string({ message: "entr valid name" }),
+  })
+  .strict();
+
 export const inviteSchemaDB = createInsertSchema(invite);
 
 export const inviteSchema = inviteSchemaDB.extend({
@@ -94,10 +100,7 @@ export const inviteSchema = inviteSchemaDB.extend({
   }),
 });
 
-// Type aliases for inferred types
-export type SignupFormData = z.infer<typeof SignupFormSchema>;
-export type ChangePasswordData = z.infer<typeof ChangePasswordSchema>;
-export type LoginFormData = z.infer<typeof LoginFormSchema>;
+export type ProfileSchema = z.infer<typeof profileSchema>;
 export type InviteFormData = z.infer<typeof inviteSchema>;
 
 export type InvitationCardData = Pick<

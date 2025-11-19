@@ -1,5 +1,6 @@
 import {
   Abril_Fatface,
+  Bagel_Fat_One,
   Cormorant_Garamond,
   Dancing_Script,
   Fredoka,
@@ -101,6 +102,13 @@ export const greatVibes = Great_Vibes({
   display: "swap",
 });
 
+const bagel = Bagel_Fat_One({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-bagel",
+  display: "swap", // Optional: if you want to use it as a Tailwind utility via CSS variable
+});
+
 // Export all font variables for root layout
 export const allFontVariables = [
   playfairDisplay.variable,
@@ -115,4 +123,5 @@ export const allFontVariables = [
   dancingScript.variable,
   pacifico.variable,
   greatVibes.variable,
+  bagel.variable,
 ].join(" ");

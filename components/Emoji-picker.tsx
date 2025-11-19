@@ -57,10 +57,10 @@ export function EmojiBackgroundPicker({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild className=" px-8">
         <Button variant="ghost" className="rounded-none">
           {selectedEmoji ? (
-            <span className="text-lg">{selectedEmoji}</span>
+            <span>{selectedEmoji}</span>
           ) : (
             <Smile className="h-4 w-4" />
           )}
