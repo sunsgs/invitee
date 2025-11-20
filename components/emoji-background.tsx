@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react"; // 1. Import memo
 
 interface EmojiBackgroundProps {
   emoji: string;
@@ -21,6 +21,7 @@ interface EmojiItem {
   zIndex: "below" | "above";
 }
 
+// ... keep generateStablePoints and STABLE_POINTS exactly as they are ...
 function generateStablePoints(
   targetCount: number
 ): Array<{ x: number; y: number }> {
@@ -122,13 +123,13 @@ function generateStablePoints(
 
 const STABLE_POINTS = generateStablePoints(60);
 
-export function EmojiBackground({
+// 2. Change to non-exported function to wrap it in memo later
+function EmojiBackgroundComponent({
   emoji,
   bgColor,
   density,
   emojiCounts,
 }: EmojiBackgroundProps) {
-  // Detect screen size for responsive behavior
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -148,7 +149,6 @@ export function EmojiBackground({
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  // Responsive density configurations
   const densityConfig = {
     1: {
       background: { desktop: 14, tablet: 10, mobile: 6 },
@@ -180,16 +180,13 @@ export function EmojiBackground({
   const emojis: EmojiItem[] = useMemo(() => {
     const items: EmojiItem[] = [];
 
-    // Responsive size multipliers
     const sizeMultiplier = isMobile ? 0.65 : isTablet ? 0.85 : 1.0;
     const minDistanceMultiplier = isMobile ? 1.3 : isTablet ? 1.15 : 1.0;
 
-    // BACKGROUND LAYER with responsive sizing
     const backgroundPoints = STABLE_POINTS.filter((point) => {
       const distFromCenter = Math.sqrt(
         Math.pow(point.x - 50, 2) + Math.pow(point.y - 50, 2)
       );
-      // Larger exclusion zone on mobile for cleaner center
       const exclusionRadius = isMobile ? 25 : isTablet ? 22 : 18;
       return distFromCenter > exclusionRadius;
     });
@@ -211,21 +208,13 @@ export function EmojiBackground({
       });
     });
 
-    // FOREGROUND LAYER - Responsive positioning and sizing
     const allPositions = [
-      // TIER 1: Minimal (2) - optimized for mobile
       { x: 30, y: 42, size: 38, rotation: -12, tier: 1 },
       { x: 70, y: 42, size: 38, rotation: 12, tier: 1 },
-
-      // TIER 2: Balanced (4)
       { x: 45, y: 26, size: 36, rotation: -8, tier: 2 },
       { x: 55, y: 58, size: 36, rotation: 10, tier: 2 },
-
-      // TIER 3: Rich (6)
       { x: 18, y: 36, size: 34, rotation: 15, tier: 3 },
       { x: 82, y: 36, size: 34, rotation: -14, tier: 3 },
-
-      // TIER 4: Maximum (10)
       { x: 28, y: 28, size: 32, rotation: -10, tier: 4 },
       { x: 50, y: 24, size: 34, rotation: 8, tier: 4 },
       { x: 72, y: 28, size: 32, rotation: 14, tier: 4 },
@@ -246,7 +235,6 @@ export function EmojiBackground({
       })
       .slice(0, counts.foreground);
 
-    // Collision detection with responsive minimum distance
     const minDistancePx = isMobile ? 16 : isTablet ? 14 : 12;
 
     const verifyNoOverlap = (
@@ -280,7 +268,6 @@ export function EmojiBackground({
       }
     }
 
-    // Apply responsive sizing to foreground emojis
     finalPositions.forEach((pos, idx) => {
       items.push({
         id: 200 + idx,
@@ -294,7 +281,14 @@ export function EmojiBackground({
     });
 
     return items;
-  }, [counts, isMobile, isTablet]);
+  }, [
+    // 3. FIXED: Deconstruct 'counts' into primitives.
+    // This ensures we compare values (14, 2) instead of Object References.
+    counts.background,
+    counts.foreground,
+    isMobile,
+    isTablet,
+  ]);
 
   const backgroundEmojis = useMemo(
     () => emojis.filter((e) => e.zIndex === "below"),
@@ -307,7 +301,6 @@ export function EmojiBackground({
   );
 
   if (!mounted) {
-    // Return simplified version for SSR
     return (
       <div className="absolute inset-0" style={{ backgroundColor: bgColor }} />
     );
@@ -315,7 +308,6 @@ export function EmojiBackground({
 
   return (
     <>
-      {/* Background layer */}
       <div
         className="absolute inset-0 overflow-hidden"
         style={{ backgroundColor: bgColor }}
@@ -339,7 +331,6 @@ export function EmojiBackground({
           </div>
         ))}
 
-        {/* Radial gradient */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -352,13 +343,12 @@ export function EmojiBackground({
           }}
         />
       </div>
-
-      {/* Foreground layer */}
+      {/*
       <div
         className="absolute inset-0 overflow-hidden pointer-events-none"
         style={{ zIndex: 30 }}
       >
-        {foregroundEmojis.map((item) => (
+         {foregroundEmojis.map((item) => (
           <div
             key={item.id}
             className="absolute pointer-events-none select-none"
@@ -377,27 +367,13 @@ export function EmojiBackground({
           >
             {emoji}
           </div>
-        ))}
+        ))} 
       </div>
+      */}
     </>
   );
 }
 
-// Demo component
-export default function Demo() {
-  return (
-    <div className="relative w-full h-screen">
-      <EmojiBackground emoji="🎉" bgColor="#fef3c7" density={2} />
-      <div className="relative z-40 flex items-center justify-center h-full">
-        <div className="text-center px-6">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
-            You're Invited!
-          </h1>
-          <p className="text-lg md:text-xl text-gray-700">
-            Resize window to see responsive behavior
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
+// 4. Wrap the export in 'memo'
+// This prevents re-renders unless props (emoji, bgColor, density) change.
+export const EmojiBackground = memo(EmojiBackgroundComponent);

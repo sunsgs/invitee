@@ -66,7 +66,7 @@ export default function LanguageSelector() {
       >
         <SelectTrigger
           id="language-selector"
-          className="w-[200px] relative"
+          className="w-[200px] relative bg-card"
           aria-label="Select language"
         >
           <div className="flex items-center gap-2">

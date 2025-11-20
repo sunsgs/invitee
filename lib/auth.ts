@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { schema } from "@/db/schema";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { admin } from "better-auth/plugins";
+import { admin, anonymous } from "better-auth/plugins";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -38,5 +38,5 @@ export const auth = betterAuth({
     },
   },
 
-  plugins: [admin()],
+  plugins: [admin(), anonymous()],
 });

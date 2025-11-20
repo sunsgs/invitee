@@ -47,7 +47,6 @@ export function FontSelector({ value, onValueChange }: FontSelectorProps) {
                 className="rounded-full"
               >
                 <span className="text-sm">
-                  {" "}
                   {cat.label.split("(")[0].trim()}
                 </span>
               </Button>

@@ -1,0 +1,1 @@
+ALTER TABLE `rsvp` DROP COLUMN `dietary_restrictions`;

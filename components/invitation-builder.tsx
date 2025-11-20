@@ -41,6 +41,12 @@ interface InvitationBuilderPropos {
   inviteEmoji?: string;
   inviteEmojiDensity?: number;
   data?: InvitationCardData;
+  inviteRSVPRequired?: boolean;
+  inviteIsMaxGuestsCountEnabled?: boolean;
+  inviteIsBabyCountEnabled?: boolean;
+  inviteMaxGuestsBabyNumber?: number;
+  inviteMaxGuestsNumber?: number;
+  inviteDescription?: string;
 }
 
 export default function InvitationBuilder({
@@ -50,11 +56,17 @@ export default function InvitationBuilder({
   inviteFontValue,
   inviteEmoji,
   inviteEmojiDensity,
+  inviteRSVPRequired,
+  inviteIsMaxGuestsCountEnabled,
+  inviteIsBabyCountEnabled,
+  inviteMaxGuestsNumber,
+  inviteMaxGuestsBabyNumber,
+  inviteDescription,
   data,
 }: InvitationBuilderPropos) {
   const [bgColor, setBgColor] = useState(inviteBgColor || "#fff");
   const [textColor, setTextColor] = useState(inviteTextColor || "#000");
-  const [fontValue, setFontValue] = useState(inviteFontValue || "playfair");
+  const [fontValue, setFontValue] = useState(inviteFontValue || "bagel");
   const [selectedEmoji, setSelectedEmoji] = useState<string | string[]>(
     inviteEmoji || ""
   );
@@ -70,11 +82,18 @@ export default function InvitationBuilder({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  const [rsvpRequired, setRsvpRequired] = useState(inviteRSVPRequired);
   // Guest count states
-  const [isMaxGuestsCountEnabled, setIsMaxGuestsCountEnabled] = useState(false);
-  const [maxGuestsNumber, setMaxGuestsNumber] = useState(2);
-  const [isBabyCountEnabled, setIsBabyCountEnabled] = useState(false);
-  const [maxBabies, setMaxBabies] = useState(2);
+  const [isMaxGuestsCountEnabled, setIsMaxGuestsCountEnabled] = useState(
+    inviteIsMaxGuestsCountEnabled
+  );
+  const [maxGuestsNumber, setMaxGuestsNumber] = useState(
+    inviteMaxGuestsNumber || 2
+  );
+  const [isBabyCountEnabled, setIsBabyCountEnabled] = useState(
+    inviteIsBabyCountEnabled
+  );
+  const [maxBabies, setMaxBabies] = useState(inviteMaxGuestsBabyNumber || 1);
 
   const handleFontChange = (value: string) => {
     setFontValue(value);
@@ -95,11 +114,11 @@ export default function InvitationBuilder({
       date: data?.date,
       startTime: data?.startTime || "",
       endTime: data?.endTime || "",
-      description: "",
+      description: inviteDescription || "",
       location: data?.location || "",
-      isMaxGuestsCountEnabled: false,
-      isBabyCountEnabled: false,
-      rsvpRequired: false,
+      isMaxGuestsCountEnabled: inviteIsMaxGuestsCountEnabled,
+      isBabyCountEnabled: inviteIsBabyCountEnabled,
+      rsvpRequired: !!inviteRSVPRequired,
     },
   });
 
@@ -132,8 +151,6 @@ export default function InvitationBuilder({
     maxBabies,
     setValue,
   ]);
-
-  const rsvpRequiredValue = watch("rsvpRequired");
 
   // Generic number input handler factory
   const createNumberInputHandler = useCallback(
@@ -280,31 +297,25 @@ export default function InvitationBuilder({
               "Save"
             )}
           </Button>
-
-          <Button
-            variant="ghost"
-            size="lg"
-            className="px-4 py-6 cta"
-            onClick={() => alert("Share feature coming soon")}
-            aria-label="Share invitation"
-          >
-            <Share size={20} />
-          </Button>
+          {inviteId && (
+            <Button
+              variant="ghost"
+              size="lg"
+              className="px-4 py-6 cta"
+              onClick={() => alert("Share feature coming soon")}
+              aria-label="Share invitation"
+            >
+              <Share size={20} />
+            </Button>
+          )}
         </div>
       </div>
 
       <main className="max-w-2xl mx-auto px-4 pb-16">
-        {/* TODO: REMOVE AS NOT NEEDED*/}
-        {Object.keys(errors).length > 0 && (
-          <pre className="bg-red-100 text-red-700 p-4 mb-4 rounded max-w-2xl overflow-auto">
-            {JSON.stringify(errors, null, 2)}
-          </pre>
-        )}
         <form
           id="invitation-form"
           onSubmit={handleSubmit((formData) => {
-            console.log("Form data:", formData);
-            onSubmit(formData); // your submit logic here
+            onSubmit(formData);
           })}
           className="flex flex-col gap-8 mt-8"
         >
@@ -370,12 +381,10 @@ export default function InvitationBuilder({
                           <Switch
                             id="rsvpRequired"
                             {...register("rsvpRequired")}
-                            checked={rsvpRequiredValue || false}
-                            onCheckedChange={(checked) =>
-                              setValue("rsvpRequired", checked)
-                            }
+                            checked={rsvpRequired}
+                            onCheckedChange={setRsvpRequired}
                             aria-label={
-                              rsvpRequiredValue ? "Disable RSVP" : "Enable RSVP"
+                              rsvpRequired ? "Disable RSVP" : "Enable RSVP"
                             }
                           />
                         </div>
@@ -399,6 +408,7 @@ export default function InvitationBuilder({
                           </div>
                           <Switch
                             id="isMaxGuestsCountEnabled"
+                            {...register("isMaxGuestsCountEnabled")}
                             checked={isMaxGuestsCountEnabled}
                             onCheckedChange={setIsMaxGuestsCountEnabled}
                             aria-label={

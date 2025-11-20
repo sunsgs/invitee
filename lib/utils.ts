@@ -95,3 +95,46 @@ export function getInitials(fullName: string): string {
   const names = fullName.trim().split(/\s+/);
   return names.map((name) => name.charAt(0).toUpperCase()).join("");
 }
+
+export function isColorDark(color: string): boolean {
+  // Default to "light" if color is missing or invalid
+  if (!color) return false;
+
+  let r, g, b;
+
+  // Handle Hex (e.g., #ffffff or #fff)
+  if (color.startsWith("#")) {
+    const hex = color.substring(1);
+    // Expansion of shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+    const expandedHex =
+      hex.length === 3
+        ? hex
+            .split("")
+            .map((char) => char + char)
+            .join("")
+        : hex;
+
+    const int = parseInt(expandedHex, 16);
+    r = (int >> 16) & 255;
+    g = (int >> 8) & 255;
+    b = int & 255;
+  }
+  // Handle standard RGB/RGBA string
+  else if (color.startsWith("rgb")) {
+    const values = color.match(/\d+/g);
+    if (!values) return false;
+    r = parseInt(values[0]);
+    g = parseInt(values[1]);
+    b = parseInt(values[2]);
+  } else {
+    // Fallback for named colors or unknowns -> assume it's light
+    return false;
+  }
+
+  // YIQ equation from 24 Basic Color Contrast algorithms
+  // ((R*299)+(G*587)+(B*114))/1000
+  // If >= 128, the color is "light", otherwise "dark"
+  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+
+  return yiq < 128;
+}

@@ -1,58 +1,82 @@
 import createMiddleware from "next-intl/middleware";
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
+import { auth } from "./lib/auth";
 
 const intlProxy = createMiddleware(routing);
+
+const PUBLIC_ROUTES = ["/"];
+const ANONYMOUS_ONLY_ROUTES = ["/user/invites/create"];
+
+function extractLocaleInfo(pathname: string) {
+  const localeMatch = pathname.match(/^\/(it|en)(\/|$)/);
+  return {
+    locale: localeMatch?.[1] ?? "it",
+    pathnameWithoutLocale: localeMatch
+      ? pathname.replace(/^\/(it|en)/, "") || "/"
+      : pathname,
+  };
+}
+
+function isRouteAllowed(
+  pathnameWithoutLocale: string,
+  routeList: string[]
+): boolean {
+  return (
+    routeList.includes(pathnameWithoutLocale) ||
+    pathnameWithoutLocale.startsWith("/_next")
+  );
+}
+
+function createRedirect(
+  request: NextRequest,
+  locale: string,
+  from: string
+): NextResponse {
+  const url = request.nextUrl.clone();
+  url.pathname = `/${locale}`;
+  url.searchParams.set("from", from);
+  return NextResponse.redirect(url);
+}
 
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Let next-intl handle the locale routing first
+  // Handle next-intl locale routing
   const intlResponse = intlProxy(request);
-
-  // If next-intl wants to redirect (e.g., from / to /it), allow it
-  if (intlResponse && intlResponse.status === 307) {
+  if (intlResponse?.status === 307) {
     return intlResponse;
   }
 
-  // Extract locale from pathname (e.g., /en/user/profile -> en)
-  const localeMatch = pathname.match(/^\/(it|en)(\/|$)/);
-  const pathnameWithoutLocale = localeMatch
-    ? pathname.replace(/^\/(it|en)/, "") || "/"
-    : pathname;
+  const { locale, pathnameWithoutLocale } = extractLocaleInfo(pathname);
 
-  // Public routes (without locale prefix)
-  const publicRoutes = ["/", "/signin"];
-
-  const isPublicRoute =
-    publicRoutes.includes(pathnameWithoutLocale) ||
-    pathnameWithoutLocale.startsWith("/invites") ||
-    pathnameWithoutLocale.startsWith("/_next");
-
-  if (isPublicRoute) {
+  // Public routes - always accessible
+  if (isRouteAllowed(pathnameWithoutLocale, PUBLIC_ROUTES)) {
     return intlResponse || NextResponse.next();
   }
 
-  // Check for session cookie existence
-  const hasSession = request.cookies.has("better-auth.session_token");
+  // Check session once
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-  if (!hasSession) {
-    const url = request.nextUrl.clone();
-    // Redirect to the root of current locale
-    const currentLocale = localeMatch ? localeMatch[1] : "it";
-    url.pathname = `/${currentLocale}`;
-    url.searchParams.set("from", pathname);
-    return NextResponse.redirect(url);
+  // Anonymous users - restricted access
+  if (session?.user.isAnonymous) {
+    return isRouteAllowed(pathnameWithoutLocale, ANONYMOUS_ONLY_ROUTES)
+      ? intlResponse || NextResponse.next()
+      : createRedirect(request, locale, pathname);
   }
 
+  // No session - redirect to home
+  if (!session) {
+    return createRedirect(request, locale, pathname);
+  }
+
+  // Authenticated user - full access
   return intlResponse || NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    // Match all pathnames except for
-    // - … if they start with `/api`, `/_next` or `/_vercel`
-    // - … the ones containing a dot (e.g. `favicon.ico`)
-    "/((?!api|_next|_vercel|.*\\..*).*)",
-  ],
+  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
 };

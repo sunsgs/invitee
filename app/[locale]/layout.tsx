@@ -35,7 +35,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body className={`${inter.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

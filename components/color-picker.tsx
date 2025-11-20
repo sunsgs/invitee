@@ -359,7 +359,7 @@ export const ColorPicker = ({
             inputMode="text"
             autoComplete="off"
             spellCheck="false"
-            className="pl-5 flex w-full items-center justify-between rounded-lg border"
+            className="pl-5 flex w-full items-center justify-between rounded-xl border"
             // className={clsx(
             //   "flex w-full items-center justify-between rounded-lg border p-3 text-base font-medium focus:ring-2 focus:outline-none transition-colors sm:text-sm sm:p-2",
             //   "pl-[32px] sm:pl-[28px] pr-[42px] sm:pr-[38px]",

@@ -1,20 +1,4 @@
-"use client";
-
-import confetti from "canvas-confetti";
-import { useEffect } from "react";
-
+import HomePage from "@/components/homepage/homepage";
 export default function Home() {
-  useEffect(() => {
-    confetti();
-  }, []);
-
-  return (
-    <button
-      onClick={() => {
-        confetti();
-      }}
-    >
-      click for confetti
-    </button>
-  );
+  return <HomePage />;
 }

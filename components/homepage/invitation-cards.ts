@@ -1,0 +1,47 @@
+export const invitationList = [
+  {
+    id: 1,
+    emoji: "🎃",
+    bgColor: "#2d1b00",
+    textColor: "#ff8c00",
+    fontValue: "poppins",
+    data: {
+      title: "Halloween Spooktacular",
+      location: "Haunted Mansion",
+      name: "Costume required",
+      date: new Date("October 31, 2025"),
+      startTime: "8:00 PM",
+      endTime: "1:00 AM",
+    },
+  },
+  {
+    id: 2,
+    emoji: "🎄",
+    bgColor: "#1a4d2e",
+    textColor: "#ffffff",
+    fontValue: "playfair",
+    data: {
+      title: "Christmas Party",
+      location: "The Winter Lodge",
+      name: "XMAS Party",
+      date: new Date("December 25, 2025"),
+      startTime: "7:00 PM",
+      endTime: "11:00 PM",
+    },
+  },
+  {
+    id: 3,
+    emoji: "🎉",
+    bgColor: "#4a00e0",
+    textColor: "#ffffff",
+    fontValue: "fredoka",
+    data: {
+      title: "New Year's Eve Gala",
+      location: "Skyline Ballroom",
+      name: "Ring in 2026",
+      date: new Date("December 31, 2025"),
+      startTime: "9:00 PM",
+      endTime: "2:00 AM",
+    },
+  },
+];

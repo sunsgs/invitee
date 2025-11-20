@@ -11,12 +11,14 @@ export default async function Page({
     where: (invite, { eq }) => eq(invite.id, id),
   });
 
+  console.log(result);
   if (result) {
     const {
       bgColor,
       textColor,
       fontValue,
       title,
+      description,
       name,
       location,
       date,
@@ -24,16 +26,27 @@ export default async function Page({
       startTime,
       endTime,
       emojiDensity,
+      rsvpRequired,
+      isBabyCountEnabled,
+      isMaxGuestsCountEnabled,
+      maxGuestsBabyNumber,
+      maxGuestsNumber,
     } = result;
 
     return (
       <InvitationBuilder
         inviteId={id}
+        inviteDescription={description || ""}
         inviteBgColor={bgColor}
         inviteTextColor={textColor}
         inviteFontValue={fontValue}
         inviteEmoji={emoji || ""}
         inviteEmojiDensity={emojiDensity || 2}
+        inviteRSVPRequired={rsvpRequired || false}
+        inviteIsBabyCountEnabled={isBabyCountEnabled || false}
+        inviteIsMaxGuestsCountEnabled={isMaxGuestsCountEnabled || false}
+        inviteMaxGuestsBabyNumber={maxGuestsBabyNumber || 1}
+        inviteMaxGuestsNumber={maxGuestsNumber || 2}
         data={{
           title: title || "",
           name: name || "",

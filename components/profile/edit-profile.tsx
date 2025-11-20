@@ -55,6 +55,7 @@ export default function EditProfile(props: { session?: any }) {
         <Input
           id="name"
           type="text"
+          className="bg-card"
           placeholder={session?.user?.name || "Enter your name"}
           {...register("name")}
           aria-invalid={errors.name ? "true" : "false"}

@@ -1,7 +1,9 @@
 import ListInvites from "@/components/list-invites";
 import { db } from "@/db";
+import { invite } from "@/db/schema";
 import { auth } from "@/lib/auth";
 import { InviteFormData } from "@/validation/schema";
+import { desc } from "drizzle-orm";
 import { headers } from "next/headers";
 
 export default async function Page() {
@@ -10,10 +12,12 @@ export default async function Page() {
   });
 
   const userId = session?.user.id;
+  console.log(session);
 
   if (session && userId) {
     const invites: InviteFormData[] = await db.query.invite.findMany({
       where: (invite, { eq }) => eq(invite.creatorId, userId),
+      orderBy: [desc(invite.date)],
     });
 
     return <ListInvites data={invites} />;

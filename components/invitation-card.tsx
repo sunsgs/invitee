@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import AutoResizingTextarea from "./AutoResizingTextarea";
 import { EmojiBackground } from "./emoji-background";
+import { FloatingError } from "./floating-error";
 import { TimeToggle } from "./invite-time";
 import PencilIconInput from "./pencil-input";
 import { Button } from "./ui/button";
@@ -71,8 +72,8 @@ export function InvitationCard({
         style={{ color: textColor, fontFamily }}
       >
         {/* Title / Heading */}
-        <div className="font-semibold text-xl sm:text-2xl w-full text-center tracking-wide">
-          {isEditing ? (
+        <div className="font-semibold text-7xl w-full text-center tracking-wide">
+          {/* {isEditing ? (
             <Controller
               name="title"
               control={control}
@@ -82,11 +83,7 @@ export function InvitationCard({
                     {...field}
                     value={field.value ?? ""} // convert null/undefined to empty string
                     aria-invalid={errors?.title ? "true" : "false"}
-                    className={`w-full focus:outline-none transition-all duration-200 ${
-                      errors?.title
-                        ? "border-red-400 border-b-2"
-                        : "border-transparent hover:border-current/30 focus:border-current/60"
-                    }`}
+                    className="w-full focus:outline-none transition-all duration-200"
                     placeholder="your title"
                     autoComplete="off"
                   />
@@ -98,11 +95,12 @@ export function InvitationCard({
             <div className="w-full" role="heading" aria-level={3}>
               {data.title}
             </div>
-          )}
+          )} */}
+          {emoji}
         </div>
 
         {/* Name */}
-        <div className="w-full font-black leading-none text-8xl md:text-8xl  text-center focus:outline-none transition-all my-8">
+        <div className="w-full font-black leading-none text-6xl md:text-6xl  text-center focus:outline-none transition-all my-8">
           {isEditing ? (
             <Controller
               name="name"
@@ -114,15 +112,11 @@ export function InvitationCard({
                     onValueChange={field.onChange}
                     maxLines={2}
                     aria-invalid={errors?.name ? "true" : "false"}
-                    className={`w-full focus:outline-none transition-all resize-none overflow-hidden text-center ${
-                      errors?.name
-                        ? "border-red-400 border-b-2"
-                        : "border-transparent hover:border-current/30 focus:border-current/60"
-                    }`}
+                    className="w-full focus:outline-none transition-all resize-none overflow-hidden text-center"
                     placeholder="Name"
                     autoComplete="off"
                   />
-                  <PencilIconInput />
+                  <FloatingError error={errors?.name} bgColor={bgColor} />
                 </div>
               )}
             />
@@ -163,13 +157,7 @@ export function InvitationCard({
                   };
 
                   return (
-                    <div
-                      className={`w-full focus:outline-none transition-all duration-200 ${
-                        errors?.date
-                          ? "border-red-400 border-b-2"
-                          : "border-transparent hover:border-current/30 focus:border-current/60"
-                      }`}
-                    >
+                    <div className="w-full focus:outline-none transition-all duration-200">
                       <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
                         <PopoverTrigger asChild>
                           <Button
@@ -215,6 +203,7 @@ export function InvitationCard({
                           />
                         </PopoverContent>
                       </Popover>
+                      <FloatingError error={errors?.date} bgColor={bgColor} />{" "}
                     </div>
                   );
                 }}
@@ -269,11 +258,7 @@ export function InvitationCard({
                   onValueChange={field.onChange}
                   maxLines={2}
                   aria-invalid={errors?.location ? "true" : "false"}
-                  className={`w-full focus:outline-none transition-all resize-none overflow-hidden text-center ${
-                    errors?.location
-                      ? "border-red-400 border-b-2"
-                      : "border-transparent hover:border-current/30 focus:border-current/60"
-                  }`}
+                  className="w-full focus:outline-none transition-all resize-none overflow-hidden text-center"
                   placeholder="location"
                   autoComplete="off"
                 />

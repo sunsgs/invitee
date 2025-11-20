@@ -20,6 +20,7 @@ export const user = sqliteTable("user", {
   banned: integer("banned", { mode: "boolean" }).default(false),
   banReason: text("ban_reason"),
   banExpires: integer("ban_expires", { mode: "timestamp_ms" }),
+  isAnonymous: integer("is_anonymous", { mode: "boolean" }),
   subscriptionTier: text("subscription_tier").default("free").notNull(),
 });
 
@@ -124,12 +125,15 @@ export const rsvp = sqliteTable("rsvp", {
   inviteId: text("invite_id")
     .notNull()
     .references(() => invite.id, { onDelete: "cascade" }),
-  userId: text("user_id").references(() => user.id, { onDelete: "set null" }),
-  guestName: text("guest_name"),
-  guestEmail: text("guest_email"),
-  status: text("status").notNull(), // e.g., "accepted", "declined", "maybe"
-  adultsCount: integer("adults_count").default(1),
-  childrenCount: integer("children_count").default(0),
+  guestName: text("guest_name").notNull(),
+  guestEmail: text("guest_email"), // optional
+  guestPhone: text("guest_phone"), // optional
+  status: text("status", { enum: ["attending", "not_attending", "maybe"] })
+    .notNull()
+    .default("attending"),
+  adultsCount: integer("adults_count").notNull().default(1),
+  babiesCount: integer("babies_count").notNull().default(0),
+  notes: text("notes"), // optional notes from guest
   createdAt: integer("created_at", { mode: "timestamp_ms" })
     .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
     .notNull(),
@@ -137,6 +141,9 @@ export const rsvp = sqliteTable("rsvp", {
     .$onUpdate(() => new Date())
     .notNull(),
 });
+
+export type Rsvp = typeof rsvp.$inferSelect;
+export type NewRsvp = typeof rsvp.$inferInsert;
 
 // Type exports
 export type User = typeof user.$inferSelect;

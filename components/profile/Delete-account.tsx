@@ -1,11 +1,9 @@
 "use client";
 
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -14,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
-import { AlertTriangle, Loader2 } from "lucide-react";
+import { Loader2, TriangleAlert } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
@@ -91,35 +89,23 @@ export default function DeleteAccountDialog({
         <DialogHeader>
           <div className="flex items-center gap-3">
             <DialogTitle className="text-xl">Delete Account</DialogTitle>
-            <DialogDescription className="text-sm mt-1">
-              This action is permanent and cannot be undone
-            </DialogDescription>
           </div>
         </DialogHeader>
-
-        <div className="space-y-4 py-4">
-          <Alert variant="destructive">
-            <AlertTriangle className="h-4 w-4" />
-            <AlertDescription className="text-sm">
-              <strong>Warning:</strong> Deleting your account will:
-              <ul className="mt-2 ml-4 list-disc space-y-1 text-xs">
-                <li>Permanently delete all your data</li>
-                <li>Remove all your content and settings</li>
-                <li>Cancel any active subscriptions</li>
-                <li>This action cannot be reversed</li>
-              </ul>
-            </AlertDescription>
-          </Alert>
-
-          {session?.user?.email && (
-            <div className="rounded-lg bg-muted p-3 space-y-1">
-              <p className="text-sm font-medium">Account to be deleted:</p>
-              <p className="text-sm text-muted-foreground">
-                {session.user.email}
+        <div className="sm:flex sm:items-start">
+          <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-500/10 sm:mx-0 sm:size-10">
+            <TriangleAlert aria-hidden="true" className="size-6 text-red-400" />
+          </div>
+          <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <div className="mt-2">
+              <p className="text-sm">
+                Are you sure you want to delete your account? All of your data
+                will be permanently removed. This action cannot be undone.
               </p>
             </div>
-          )}
+          </div>
+        </div>
 
+        <div className="space-y-4 py-4">
           <div className="space-y-2">
             <Label htmlFor="confirm-delete" className="text-sm font-medium">
               Type <span className="font-mono font-bold">{CONFIRM_PHRASE}</span>{" "}
@@ -138,7 +124,7 @@ export default function DeleteAccountDialog({
           </div>
         </div>
 
-        <DialogFooter className="gap-2 sm:gap-0">
+        <DialogFooter className="gap-2">
           <Button
             type="button"
             variant="outline"

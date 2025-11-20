@@ -4,8 +4,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme {
+@theme inline {
   --font-bagel: var(--font-bagel);
+  --font-sans: var(--font-inter);
+  --font-poppins: var(--font-poppins);
 }
 
 /* 
@@ -171,9 +173,6 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-sans: var(--font-sans);
-  --font-bagel: var(--font-bagel);
-
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -223,12 +222,12 @@
     @apply !font-bold text-xl;
   }
 
-  h2 {
-    @apply text-lg font-semibold;
+  .logo {
+    @apply shrink-0 font-bagel text-primary tracking-tightest
   }
 
-  h1 {
-    @apply text-xl font-semibold;
+  h1, h2, h3 {
+    @apply font-poppins tracking-tighter;
   }
 
 }

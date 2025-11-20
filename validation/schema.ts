@@ -1,4 +1,4 @@
-import { invite } from "@/db/schema";
+import { invite, rsvp } from "@/db/schema";
 import { createInsertSchema } from "drizzle-zod";
 import z from "zod";
 
@@ -86,7 +86,7 @@ import z from "zod";
 
 export const profileSchema = z
   .object({
-    name: z.string({ message: "entr valid name" }),
+    name: z.string().min(3, { message: "entr valid name" }),
   })
   .strict();
 
@@ -100,8 +100,11 @@ export const inviteSchema = inviteSchemaDB.extend({
   }),
 });
 
+export const RSVPSchema = createInsertSchema(rsvp);
+
 export type ProfileSchema = z.infer<typeof profileSchema>;
 export type InviteFormData = z.infer<typeof inviteSchema>;
+export type RSVPFormData = z.infer<typeof RSVPSchema>;
 
 export type InvitationCardData = Pick<
   InviteFormData,

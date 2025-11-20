@@ -3,7 +3,7 @@ import LanguageSelector from "@/components/profile/Language-selector";
 import { Separator } from "@/components/ui/separator";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import DeleteAccountDialog from "./Delete-account";
+import DeleteAccountDialog from "../../../../components/profile/Delete-account";
 
 export default async function AccountSettingsPage() {
   const session = await auth.api.getSession({
@@ -58,7 +58,7 @@ export default async function AccountSettingsPage() {
             Irreversible actions that affect your account
           </p>
         </div>
-        <div className="rounded-lg border border-destructive/50 bg-destructive/5 p-6 space-y-4">
+        <div className="rounded-xl border border-destructive/50 bg-destructive/5 p-6 space-y-4">
           <div className="flex items-start justify-between gap-4">
             <div className="space-y-1 flex-1">
               <h3 className="text-base font-semibold">Delete Account</h3>

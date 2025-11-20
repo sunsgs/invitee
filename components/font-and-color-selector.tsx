@@ -33,7 +33,6 @@ export function FontAndColorPopover({
 
   return (
     <Popover>
-      {" "}
       <PopoverTrigger asChild>
         <Button
           variant="outline"
