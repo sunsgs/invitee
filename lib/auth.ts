@@ -28,7 +28,7 @@ export const auth = betterAuth({
         type: "string",
         required: true,
         defaultValue: "free",
-        input: false, // prevent users from setting this directly
+        input: false,
       },
     },
   },

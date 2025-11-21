@@ -9,7 +9,6 @@ import {
 import { EMOJI_GROUPS } from "@/lib/emojis";
 import { Smile } from "lucide-react";
 import { useMemo, useState } from "react";
-import { Input } from "./ui/input";
 
 interface EmojiBackgroundPickerProps {
   onEmojiSelect: (emoji: string) => void;
@@ -74,7 +73,7 @@ export function EmojiBackgroundPicker({
         {/* Header */}
         <div className="flex flex-col gap-3 px-6">
           {/* Search Input */}
-          <Input
+          {/* <Input
             type="text"
             aria-label="Search emojis"
             placeholder="Search emojis..."
@@ -84,10 +83,10 @@ export function EmojiBackgroundPicker({
               setActiveCategory(0);
             }}
             className="w-full px-3 py-2 mt-6 rounded-lg text-sm"
-          />
+          /> */}
 
           {/* Category Tabs - Horizontal Scroll */}
-          <div className="flex gap-1.5 overflow-x-auto pb-1 -mx-6 px-6">
+          <div className="flex gap-1.5 overflow-x-auto pt-4 -mx-6 px-6">
             {filteredGroups.map((group, idx) => (
               <Button
                 key={idx}

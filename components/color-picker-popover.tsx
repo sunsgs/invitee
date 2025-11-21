@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -15,6 +14,7 @@ interface ColorPickerPopoverProps {
   icon: React.ReactNode;
   label: string;
 }
+
 export function ColorPickerPopover({
   color,
   onColorChange,
@@ -22,11 +22,14 @@ export function ColorPickerPopover({
   label,
 }: ColorPickerPopoverProps) {
   const [open, setOpen] = useState(false);
-  const isFirstChange = useRef(true);
+  const lastColorRef = useRef(color);
 
   const handleChange = (c: { hex: string }) => {
-    onColorChange(c.hex);
-    console.log("test");
+    // Only trigger onChange if the color actually changed
+    if (c.hex.toLowerCase() !== lastColorRef.current.toLowerCase()) {
+      lastColorRef.current = c.hex;
+      onColorChange(c.hex);
+    }
   };
 
   return (
@@ -34,11 +37,14 @@ export function ColorPickerPopover({
       open={open}
       onOpenChange={(val) => {
         setOpen(val);
-        if (val) isFirstChange.current = true; // reset on open
+        if (val) {
+          // Sync ref with current prop when opening
+          lastColorRef.current = color;
+        }
       }}
     >
       <PopoverTrigger asChild>
-        <Button variant="ghost" className="rounded-none">
+        <Button variant="ghost" className="rounded-none" type="button">
           {icon}
           {/* <span className="hidden sm:inline">{label}</span> */}
           <div

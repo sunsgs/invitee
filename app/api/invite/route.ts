@@ -20,7 +20,6 @@ export async function POST(req: NextRequest) {
   }
   try {
     const data = await req.json();
-    console.log(data);
     const newInvite = {
       id: nanoid(),
       ...data,
@@ -31,7 +30,6 @@ export async function POST(req: NextRequest) {
       updatedAt: new Date(),
     };
 
-    console.log(newInvite);
     await db.insert(invite).values(newInvite);
 
     return NextResponse.json({ success: true, id: newInvite.id });
@@ -58,7 +56,6 @@ export async function PATCH(req: NextRequest) {
 
   try {
     const data = await req.json();
-    console.log(data);
     const { id, ...updateData } = data;
 
     if (!id) {

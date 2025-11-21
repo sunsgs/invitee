@@ -12,7 +12,6 @@ export default async function Page() {
   });
 
   const userId = session?.user.id;
-  console.log(session);
 
   if (session && userId) {
     const invites: InviteFormData[] = await db.query.invite.findMany({

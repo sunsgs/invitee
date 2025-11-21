@@ -63,7 +63,6 @@ export default function RsvpForm({ inviteId, onSubmitAction }: RsvpFormProps) {
 
   const onSubmit = (data: RSVPFormData) => {
     startTransition(async () => {
-      console.log(`Submitting RSVP for invite ${inviteId}:`, data);
       await new Promise((resolve) => setTimeout(resolve, 1000));
       if (onSubmitAction) await onSubmitAction(data);
     });

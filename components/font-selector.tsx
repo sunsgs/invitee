@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -27,23 +26,29 @@ export function FontSelector({ value, onValueChange }: FontSelectorProps) {
   const selectedFont = INVITATION_FONTS.find((f) => f.value === value);
 
   return (
-    <div className="flex  gap-1">
+    <div className="flex gap-1">
       <Select value={value} onValueChange={onValueChange}>
         <SelectTrigger className="bg-background border-none shadow-none">
           <Type className="h-4 w-4 shrink-0" />
-          {/* <SelectValue placeholder="Scegli font" className="invisible">
-            {selectedFont?.name}
-          </SelectValue> */}
         </SelectTrigger>
         <SelectContent className="mb-3 w-70">
           {/* Category Filter Buttons */}
-          <div className="flex f gap-1 p-2 border-b overflow-x-auto">
+          <div className="flex gap-1 p-2 border-b overflow-x-auto">
             {FONT_CATEGORIES.map((cat) => (
               <Button
                 size={"lg"}
                 key={cat.value}
+                type="button"
                 variant={categoryFilter === cat.value ? "default" : "outline"}
-                onClick={() => setCategoryFilter(cat.value)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setCategoryFilter(cat.value);
+                }}
+                onPointerDown={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
                 className="rounded-full"
               >
                 <span className="text-sm">
@@ -52,7 +57,6 @@ export function FontSelector({ value, onValueChange }: FontSelectorProps) {
               </Button>
             ))}
           </div>
-
           {/* Font List */}
           <div className="max-h-[300px] overflow-y-auto p-1">
             {filteredFonts.map((font) => (

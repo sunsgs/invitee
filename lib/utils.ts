@@ -138,3 +138,7 @@ export function isColorDark(color: string): boolean {
 
   return yiq < 128;
 }
+
+export function read() {
+  return sessionStorage.getItem("pending_action");
+}
