@@ -4,6 +4,7 @@
 import { signIn } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import { Easing, motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import {
@@ -34,6 +35,7 @@ export default function SignInDialog({
   const EASE: Easing = [0.88, -0.4, 0.18, 1];
   const [loading, setLoading] = useState(false);
   const [internalOpen, setInternalOpen] = useState(false);
+  const t = useTranslations();
 
   // Use controlled or uncontrolled mode
   const isOpen = open !== undefined ? open : internalOpen;
@@ -60,7 +62,7 @@ export default function SignInDialog({
         {showTrigger && (
           <DialogTrigger asChild>
             <Button className="px-8 py-4 border-b-4" variant="outline">
-              Log in
+              {t("COMMON.LOGIN")}
             </Button>
           </DialogTrigger>
         )}

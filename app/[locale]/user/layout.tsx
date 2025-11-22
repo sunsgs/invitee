@@ -8,10 +8,7 @@ export default async function Layout({
   return (
     <div>
       <Header />
-      <section className="max-w-4xl w-full mx-auto">
-        <div className="mx-8">{children}</div>
-      </section>
-      ;
+      <section className="max-w-4xl w-full mx-auto px-8">{children}</section>;
     </div>
   );
 }

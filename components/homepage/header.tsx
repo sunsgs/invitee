@@ -5,7 +5,7 @@ export default function HeaderHome() {
   const EASE: Easing = [0.88, -0.4, 0.18, 1];
 
   return (
-    <header className="flex flex-col relative mx-4 my-4">
+    <header className="flex flex-col relative w-full my-4 max-w-7xl mx-auto px-4">
       <div className="flex justify-between items-center">
         <div className="logo pr-4 text-4xl flex items-center overflow-hidden">
           {"SMOOU".split("").map((char, index) => (

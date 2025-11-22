@@ -1,13 +1,46 @@
 {
-  "SIGNUP": {
-    "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "User existing",
-    "PASSWORDS_NOT_MATCHING": "Passwords do not match"
+  "HOMEPAGE": {
+    "HERO": {
+      "TITLE": "Create invites too good to ignore.",
+      "SUBTITLE": "Pick your style, send the invite, and see who’s in, who’s out (and who’s having second thoughts).",
+      "CTA": "Invite with Style"
+    },
+    "FEATURES": {
+      "TITLE": "Features That Rock",
+      "SUBTITLE": "Why settle for a plain invite when you can create a masterpiece?",
+      "FEATURE1": {
+        "TITLE": "Make It Yours",
+        "COPY": "Customize your invite however you like: pick colors, fonts, and the perfect style just for you."
+      },
+      "FEATURE2": {
+        "TITLE": "Pick Your Emoji",
+        "COPY": "Choose the emoji that stands out the most—because sometimes one emoji says more than a thousand words."
+      },
+      "FEATURE3": {
+        "TITLE": "Handle RSVPs Like a Pro",
+        "COPY": "Who’s responding? How many friends are they bringing? And what about the little VIPs? Nothing’s left to chance here: you decide who gets the invite, who can bring guests, and if the kiddos are welcome."
+      }
+    },
+    "CARDS": {
+      "1": {
+        "NAME": "Halloween Hunting",
+        "LOCATION": "Haunted Mansion"
+      },
+      "2": {
+        "NAME": "XMAS Party",
+        "LOCATION": "The Winter Lodge"
+      },
+      "3": {
+        "NAME": "New Years Eve",
+        "LOCATION": "Skyline Ballroom"
+      }
+    }
   },
-  "LOGIN": {
-    "INVALID_EMAIL_OR_PASSWORD": "Invalid email or password"
-  },
-  "HomePage": {
-    "title": "Hello world!"
+  "COMMON": {
+    "LOGIN": "Log in",
+    "GOOGLE": "Log in with Google",
+    "LOGINTOCONTINUE": "Log in to continue",
+    "FACEBOOK": "Log in with Facebook"
   },
   "PROFILE": {
     "NAME": "Full name"

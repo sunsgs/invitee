@@ -1,17 +1,61 @@
 "use client";
 import { authClient, signIn } from "@/lib/auth-client";
 import { Easing, motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { InvitationCard } from "../invitation-card";
 import { Button } from "../ui/button";
-import { invitationList } from "./invitation-cards";
 
 export default function Hero() {
+  const t = useTranslations("HOMEPAGE");
+
+  const invitations = [
+    {
+      id: 1,
+      emoji: "🎃",
+      bgColor: "#2d1b00",
+      textColor: "#ff8c00",
+      fontValue: "poppins",
+      data: {
+        location: t("CARDS.1.LOCATION"),
+        name: t("CARDS.1.NAME"),
+        date: new Date("October 31, 2025"),
+        startTime: "8:00 PM",
+        endTime: "1:00 AM",
+      },
+    },
+    {
+      id: 2,
+      emoji: "🎄",
+      bgColor: "#1a4d2e",
+      textColor: "#ffffff",
+      fontValue: "playfair",
+      data: {
+        location: t("CARDS.2.LOCATION"),
+        name: t("CARDS.2.NAME"),
+        date: new Date("December 25, 2025"),
+        startTime: "7:00 PM",
+        endTime: "11:00 PM",
+      },
+    },
+    {
+      id: 3,
+      emoji: "🎉",
+      bgColor: "#4a00e0",
+      textColor: "#ffffff",
+      fontValue: "fredoka",
+      data: {
+        location: t("CARDS.3.LOCATION"),
+        name: t("CARDS.3.NAME"),
+        date: new Date("December 31, 2025"),
+        startTime: "9:00 PM",
+        endTime: "2:00 AM",
+      },
+    },
+  ];
   const router = useRouter();
 
   const EASE: Easing = [0.88, -0.4, 0.18, 1];
-
-  const invitations = invitationList;
   const totalCards = invitations.length;
   const centerIndex = Math.floor(totalCards / 2);
   const totalRotation = 35;
@@ -30,7 +74,7 @@ export default function Hero() {
         document.body.classList.remove("overflow-hidden")
       }
     >
-      <div className="w-full flex flex-col h-full justify-center  items-center text-center">
+      <div className="w-full flex flex-col h-full justify-center  items-center text-center md:max-w-3xl mx-auto">
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -39,23 +83,22 @@ export default function Hero() {
             delay: 1,
             ease: EASE,
           }}
-          className="text-5xl md:text-6xl font-semibold mb-4 mt-5 tracking-tighter max-w-3xl"
+          className="mt-4"
         >
-          Crea inviti troppo belli per essere ignorati.
+          {t("HERO.TITLE")}
         </motion.h1>
-        <motion.span
+        <motion.h3
           initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 1.2, ease: EASE }}
-          className="mt-8 tex-lg"
         >
-          Scegli uno stile, lancia l’invito, scopri chi viene, chi no (e chi si
-          pente).
-        </motion.span>
+          {t("HERO.SUBTITLE")}
+        </motion.h3>
         <motion.div
           initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.8, delay: 1.2, ease: EASE }}
+          className="mt-2"
         >
           <Button
             onClick={async () => {
@@ -67,13 +110,13 @@ export default function Hero() {
               await signIn.anonymous();
               router.push("/user/invites/create");
             }}
-            className="px-12 py-6 mt-4 shadow-xl text-xl border-b-4 bg-primary/90 border-primary"
+            className="shadow-xl bg-primary/90 hover:bg-primary/80 px-12 py-6 border-b-4 border-primary font-medium text-lg"
           >
-            Invita con stile
+            {t("HERO.CTA")}
           </Button>
         </motion.div>
-        <div className="w-full flex items-center pt-10">
-          <div className="flex w-full justify-center relative min-h-[500]">
+        <div className="w-full flex items-center">
+          <div className="flex w-full justify-center relative min-h-[400] md:min-h-[500] scale-85 md:scale-90 lg:scale-100 mt-2 md:mt-4 lg:mt-8 xl:mt-16">
             {invitations.map((invitation, index) => {
               const position = index - centerIndex;
               const rotationAngle = -(position * rotationInterval);
@@ -118,7 +161,6 @@ export default function Hero() {
                     textColor={invitation.textColor}
                     fontValue={invitation.fontValue}
                     data={{
-                      title: invitation.data.title,
                       name: invitation.data.name,
                       date: invitation.data.date,
                     }}

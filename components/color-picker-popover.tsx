@@ -1,10 +1,12 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 import { useRef, useState } from "react";
 import { ColorPicker } from "./color-picker";
 
@@ -13,6 +15,7 @@ interface ColorPickerPopoverProps {
   onColorChange: (color: string) => void;
   icon: React.ReactNode;
   label: string;
+  className?: string;
 }
 
 export function ColorPickerPopover({
@@ -20,12 +23,12 @@ export function ColorPickerPopover({
   onColorChange,
   icon,
   label,
+  className,
 }: ColorPickerPopoverProps) {
   const [open, setOpen] = useState(false);
   const lastColorRef = useRef(color);
 
   const handleChange = (c: { hex: string }) => {
-    // Only trigger onChange if the color actually changed
     if (c.hex.toLowerCase() !== lastColorRef.current.toLowerCase()) {
       lastColorRef.current = c.hex;
       onColorChange(c.hex);
@@ -38,27 +41,48 @@ export function ColorPickerPopover({
       onOpenChange={(val) => {
         setOpen(val);
         if (val) {
-          // Sync ref with current prop when opening
           lastColorRef.current = color;
         }
       }}
     >
       <PopoverTrigger asChild>
-        <Button variant="ghost" className="rounded-none" type="button">
-          {icon}
-          {/* <span className="hidden sm:inline">{label}</span> */}
+        <Button
+          variant="ghost"
+          type="button"
+          aria-label={label}
+          className={cn(
+            "flex items-center justify-center gap-2",
+            "min-w-11 min-h-11 p-2",
+            className
+          )}
+        >
+          <span className="text-muted-foreground">{icon}</span>
           <div
-            className="h-5 w-5 rounded-sm border"
+            className="
+              h-5 w-5 
+              rounded-md 
+              border border-border/50
+              shadow-sm
+              ring-1 ring-inset ring-black/5
+              transition-transform
+              group-active:scale-95
+            "
             style={{ backgroundColor: color }}
+            aria-hidden="true"
           />
         </Button>
       </PopoverTrigger>
+
       <PopoverContent
-        className="w-auto p-0 ml-2"
-        sideOffset={16}
-        align="center"
+        className="p-3 rounded-2xl shadow-lg border-border/50"
+        sideOffset={12}
+        align="start"
+        side="top"
+        collisionPadding={8}
       >
-        <ColorPicker defaultValue={color} onChange={handleChange} />
+        <div className="flex flex-col gap-2">
+          <ColorPicker defaultValue={color} onChange={handleChange} />
+        </div>
       </PopoverContent>
     </Popover>
   );

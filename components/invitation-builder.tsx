@@ -158,7 +158,7 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
         onShare={() => alert("Share feature coming soon")}
       />
 
-      <main className="max-w-2xl mx-auto px-4 pb-16">
+      <div className="w-full mb-10">
         <form
           id="invitation-form"
           onSubmit={handleSubmit(onSubmit)}
@@ -172,7 +172,8 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
             textColor={textColor || "#000"}
             fontValue={fontValue || "bagel"}
             emoji={previewEmoji || ""}
-            emojiIntensity={emojiDensity || 2}
+            // emojiIntensity={emojiDensity || 2}
+            emojiIntensity={1}
             data={{
               title,
               name,
@@ -184,7 +185,7 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
           />
 
           <Field>
-            <h2>Notes/Description</h2>
+            <h3 className="m-0">Notes/Description</h3>
             <Textarea
               className="bg-card rounded-2xl p-4 focus:outline-none focus-visible:border-foreground focus-visible:ring-[0]"
               id="description"
@@ -249,7 +250,7 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
             }}
           />
         </form>
-      </main>
+      </div>
     </div>
   );
 }

@@ -1,13 +1,46 @@
 {
-  "SIGNUP": {
-    "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "User existing",
-    "PASSWORDS_NOT_MATCHING": "Passwords do not match"
+  "HOMEPAGE": {
+    "HERO": {
+      "TITLE": "Inviti troppo belli per essere ignorati.",
+      "SUBTITLE": "Scegli uno stile, lancia l’invito, scopri chi viene, chi no (e chi si pente).",
+      "CTA": "Invita con stile"
+    },
+    "FEATURES": {
+      "TITLE": "Feature che spaccano",
+      "SUBTITLE": "Perché accontentarti di un invito normale quando puoi tirare fuori un capolavoro?",
+      "FEATURE1": {
+        "TITLE": "Personalizza",
+        "COPY": "Personalizza il tuo invito come vuoi: scegli colori, font e tutto il look perfetto per te."
+      },
+      "FEATURE2": {
+        "TITLE": "Scegli l'emoji",
+        "COPY": "Metti l'emoji che spacca di più, perché un'emoji dice più di mille parole."
+      },
+      "FEATURE3": {
+        "TITLE": "Gestisci le risposte come un vero boss",
+        "COPY": "Chi risponde? Quanti amici portano? E quanti pargoli con pedigree? Qui non si lascia niente al caso: decidi tu chi merita di venire alla festa, chi può portare compagnia e se i cuccioli sono benvenuti."
+      }
+    },
+    "CARDS": {
+      "1": {
+        "NAME": "Halloween Hunting",
+        "LOCATION": "Casa infestata"
+      },
+      "2": {
+        "NAME": "XMAS Party",
+        "LOCATION": "Polo Nord"
+      },
+      "3": {
+        "NAME": "New Years Eve",
+        "LOCATION": "Casa mia"
+      }
+    }
   },
-  "LOGIN": {
-    "INVALID_EMAIL_OR_PASSWORD": "Invalid email or password"
-  },
-  "HomePage": {
-    "title": "Hello world!"
+  "COMMON": {
+    "LOGIN": "Log in",
+    "LOGINTOCONTINUE": "Log in per continuare",
+    "GOOGLE": "Log in con Google",
+    "FACEBOOK": "Log in con Facebook"
   },
   "PROFILE": {
     "NAME": "Nome completo"

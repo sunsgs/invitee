@@ -1,20 +1,19 @@
 import { CheckCircle, PaintBucket, Palette, Type, User } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { Button } from "../ui/button";
 
 export default function FeatureSection() {
+  const t = useTranslations("HOMEPAGE.FEATURES");
   return (
     <section className="my-32 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-32 text-center">
           <h2 className="font-bold text-5xl tracking-tight mb-6">
-            Feature che spaccano
+            {t("TITLE")}
           </h2>
-          <p className="text-lg">
-            Perché accontentarti di un invito normale quando puoi tirare fuori
-            un capolavoro?
-          </p>
+          <p className="text-lg">{t("SUBTITLE")}</p>
         </div>
 
         {/* Features Grid */}
@@ -28,12 +27,9 @@ export default function FeatureSection() {
             </div>
             <div className="order-1 md:order-2 space-y-6">
               <h3 className="text-4xl font-bold tracking-tight">
-                Personalizza
+                {t("FEATURE1.TITLE")}
               </h3>
-              <p className="text-lg">
-                Personalizza il tuo invito come vuoi: scegli colori, font e
-                tutto il look perfetto per te.
-              </p>
+              <p className="text-lg">{t("FEATURE1.COPY")}</p>
             </div>
           </div>
 
@@ -41,12 +37,9 @@ export default function FeatureSection() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
               <h3 className="text-4xl font-bold tracking-tight">
-                Scegli l'emoji
+                {t("FEATURE2.TITLE")}
               </h3>
-              <p className="text-lg ">
-                Metti l'emoji che spacca di più, perché un'emoji dice più di
-                mille parole.
-              </p>
+              <p className="text-lg ">{t("FEATURE2.COPY")}</p>
             </div>
             <div className="relative h-64 w-64 mx-auto">
               {/* Center emoji */}
@@ -130,13 +123,10 @@ export default function FeatureSection() {
             </div>
             <div className="order-1 md:order-2 space-y-6">
               <h3 className="text-3xl font-bold tracking-tight leading-tight">
-                Gestisci le risposte come un vero boss
+                {t("FEATURE3.TITLE")}
               </h3>
               <p className="text-lg text-neutral-600 leading-relaxed">
-                Chi risponde? Quanti amici portano? E quanti pargoli con
-                pedigree? Qui non si lascia niente al caso: decidi tu chi merita
-                di venire alla festa, chi può portare compagnia e se i cuccioli
-                sono benvenuti.
+                {t("FEATURE3.COPY")}
               </p>
             </div>
           </div>

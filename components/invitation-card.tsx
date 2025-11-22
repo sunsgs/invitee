@@ -108,6 +108,7 @@ export function InvitationCard({
               render={({ field }) => (
                 <div className="relative group w-full">
                   <AutoResizingTextarea
+                    style={{ color: textColor, fontFamily }}
                     value={field.value}
                     onValueChange={field.onChange}
                     maxLines={2}

@@ -1,5 +1,5 @@
 "use client";
-import { memo, useEffect, useMemo, useState } from "react"; // 1. Import memo
+import { memo, useEffect, useMemo, useState } from "react";
 
 interface EmojiBackgroundProps {
   emoji: string;
@@ -21,7 +21,6 @@ interface EmojiItem {
   zIndex: "below" | "above";
 }
 
-// ... keep generateStablePoints and STABLE_POINTS exactly as they are ...
 function generateStablePoints(
   targetCount: number
 ): Array<{ x: number; y: number }> {
@@ -123,7 +122,68 @@ function generateStablePoints(
 
 const STABLE_POINTS = generateStablePoints(60);
 
-// 2. Change to non-exported function to wrap it in memo later
+// Seeded random for consistent selection
+function seededSelect(seed: number): number {
+  const x = Math.sin(seed * 9999) * 10000;
+  return x - Math.floor(x);
+}
+
+// Select evenly distributed points from all quadrants
+function selectBalancedPoints(
+  points: Array<{ x: number; y: number }>,
+  count: number,
+  exclusionRadius: number
+): Array<{ x: number; y: number }> {
+  // Filter out center points
+  const validPoints = points.filter((point) => {
+    const distFromCenter = Math.sqrt(
+      Math.pow(point.x - 50, 2) + Math.pow(point.y - 50, 2)
+    );
+    return distFromCenter > exclusionRadius;
+  });
+
+  // Divide into quadrants
+  const quadrants = {
+    topLeft: validPoints.filter((p) => p.x < 50 && p.y < 50),
+    topRight: validPoints.filter((p) => p.x >= 50 && p.y < 50),
+    bottomLeft: validPoints.filter((p) => p.x < 50 && p.y >= 50),
+    bottomRight: validPoints.filter((p) => p.x >= 50 && p.y >= 50),
+  };
+
+  const selected: Array<{ x: number; y: number }> = [];
+  const quadrantOrder = [
+    "topLeft",
+    "topRight",
+    "bottomRight",
+    "bottomLeft",
+  ] as const;
+
+  // Round-robin selection from each quadrant
+  let quadrantIdx = 0;
+  let passCount = 0;
+
+  while (selected.length < count && passCount < count * 2) {
+    const quadrantName = quadrantOrder[quadrantIdx % 4];
+    const quadrant = quadrants[quadrantName];
+
+    // Find next available point in this quadrant
+    const available = quadrant.filter((p) => !selected.includes(p));
+
+    if (available.length > 0) {
+      // Use seeded random to pick from available points
+      const pickIdx = Math.floor(
+        seededSelect(selected.length * 17 + quadrantIdx) * available.length
+      );
+      selected.push(available[pickIdx]);
+    }
+
+    quadrantIdx++;
+    passCount++;
+  }
+
+  return selected;
+}
+
 function EmojiBackgroundComponent({
   emoji,
   bgColor,
@@ -181,122 +241,39 @@ function EmojiBackgroundComponent({
     const items: EmojiItem[] = [];
 
     const sizeMultiplier = isMobile ? 0.65 : isTablet ? 0.85 : 1.0;
-    const minDistanceMultiplier = isMobile ? 1.3 : isTablet ? 1.15 : 1.0;
+    const exclusionRadius = isMobile ? 25 : isTablet ? 22 : 18;
 
-    const backgroundPoints = STABLE_POINTS.filter((point) => {
-      const distFromCenter = Math.sqrt(
-        Math.pow(point.x - 50, 2) + Math.pow(point.y - 50, 2)
-      );
-      const exclusionRadius = isMobile ? 25 : isTablet ? 22 : 18;
-      return distFromCenter > exclusionRadius;
-    });
-
-    const selectedPoints = backgroundPoints.slice(0, counts.background);
+    // Use balanced selection instead of simple slice
+    const selectedPoints = selectBalancedPoints(
+      STABLE_POINTS,
+      counts.background,
+      exclusionRadius
+    );
 
     selectedPoints.forEach((point, idx) => {
-      const baseSize = 16 + Math.random() * 24;
+      // Use seeded random for consistent size/rotation
+      const baseSize = 16 + seededSelect(idx * 13) * 24;
+      const rotation = seededSelect(idx * 17) * 360;
+      const opacityBase = isMobile ? 0.2 : 0.25;
+      const opacityRange = isMobile ? 0.2 : 0.25;
+      const opacity = opacityBase + seededSelect(idx * 23) * opacityRange;
+
       items.push({
         id: idx,
         x: point.x,
         y: point.y,
         size: baseSize * sizeMultiplier,
-        rotation: Math.random() * 360,
-        opacity: isMobile
-          ? 0.2 + Math.random() * 0.2
-          : 0.25 + Math.random() * 0.25,
+        rotation,
+        opacity,
         zIndex: "below",
       });
     });
 
-    const allPositions = [
-      { x: 30, y: 42, size: 38, rotation: -12, tier: 1 },
-      { x: 70, y: 42, size: 38, rotation: 12, tier: 1 },
-      { x: 45, y: 26, size: 36, rotation: -8, tier: 2 },
-      { x: 55, y: 58, size: 36, rotation: 10, tier: 2 },
-      { x: 18, y: 36, size: 34, rotation: 15, tier: 3 },
-      { x: 82, y: 36, size: 34, rotation: -14, tier: 3 },
-      { x: 28, y: 28, size: 32, rotation: -10, tier: 4 },
-      { x: 50, y: 24, size: 34, rotation: 8, tier: 4 },
-      { x: 72, y: 28, size: 32, rotation: 14, tier: 4 },
-      { x: 15, y: 38, size: 30, rotation: 12, tier: 4 },
-      { x: 85, y: 38, size: 30, rotation: -12, tier: 4 },
-      { x: 35, y: 46, size: 30, rotation: -8, tier: 4 },
-      { x: 65, y: 46, size: 30, rotation: 10, tier: 4 },
-      { x: 25, y: 54, size: 32, rotation: 6, tier: 4 },
-      { x: 50, y: 58, size: 34, rotation: -6, tier: 4 },
-      { x: 75, y: 54, size: 32, rotation: 12, tier: 4 },
-    ];
-
-    const selectedPositions = allPositions
-      .filter((p) => p.tier <= Math.ceil(counts.foreground / 2.5))
-      .sort((a, b) => {
-        if (a.tier !== b.tier) return a.tier - b.tier;
-        return a.y - b.y;
-      })
-      .slice(0, counts.foreground);
-
-    const minDistancePx = isMobile ? 16 : isTablet ? 14 : 12;
-
-    const verifyNoOverlap = (
-      newPos: (typeof allPositions)[0],
-      existing: typeof selectedPositions
-    ): boolean => {
-      return !existing.some((pos) => {
-        const dx = newPos.x - pos.x;
-        const dy = newPos.y - pos.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        return distance < minDistancePx * minDistanceMultiplier;
-      });
-    };
-
-    const finalPositions: typeof allPositions = [];
-    selectedPositions.forEach((pos) => {
-      if (verifyNoOverlap(pos, finalPositions)) {
-        finalPositions.push(pos);
-      }
-    });
-
-    if (finalPositions.length < counts.foreground) {
-      const tier2Positions = allPositions.filter(
-        (p) => p.tier === 2 && !finalPositions.includes(p)
-      );
-      for (const pos of tier2Positions) {
-        if (finalPositions.length >= counts.foreground) break;
-        if (verifyNoOverlap(pos, finalPositions)) {
-          finalPositions.push(pos);
-        }
-      }
-    }
-
-    finalPositions.forEach((pos, idx) => {
-      items.push({
-        id: 200 + idx,
-        x: pos.x,
-        y: pos.y,
-        size: pos.size * sizeMultiplier,
-        rotation: pos.rotation,
-        opacity: 1.0,
-        zIndex: "above",
-      });
-    });
-
     return items;
-  }, [
-    // 3. FIXED: Deconstruct 'counts' into primitives.
-    // This ensures we compare values (14, 2) instead of Object References.
-    counts.background,
-    counts.foreground,
-    isMobile,
-    isTablet,
-  ]);
+  }, [counts.background, isMobile, isTablet]);
 
   const backgroundEmojis = useMemo(
     () => emojis.filter((e) => e.zIndex === "below"),
-    [emojis]
-  );
-
-  const foregroundEmojis = useMemo(
-    () => emojis.filter((e) => e.zIndex === "above"),
     [emojis]
   );
 
@@ -306,74 +283,39 @@ function EmojiBackgroundComponent({
     );
   }
 
-  return (
-    <>
+  if (!emoji) {
+    return (
       <div
-        className="absolute inset-0 overflow-hidden"
+        className="absolute inset-0 transition-colors duration-200"
         style={{ backgroundColor: bgColor }}
-      >
-        {backgroundEmojis.map((item) => (
-          <div
-            key={item.id}
-            className="absolute pointer-events-none select-none"
-            style={{
-              left: `${item.x}%`,
-              top: `${item.y}%`,
-              transform: `translate(-50%, -50%) rotate(${item.rotation}deg)`,
-              fontSize: `${item.size}px`,
-              opacity: item.opacity,
-              filter: `drop-shadow(0 1px 2px rgba(0,0,0,0.08))`,
-              userSelect: "none",
-            }}
-            aria-hidden="true"
-          >
-            {emoji}
-          </div>
-        ))}
+      />
+    );
+  }
 
-        <div
-          className="absolute inset-0 pointer-events-none"
+  return (
+    <div
+      className="absolute inset-0 overflow-hidden transition-colors duration-200"
+      style={{ backgroundColor: bgColor }}
+    >
+      {backgroundEmojis.map((item) => (
+        <span
+          key={item.id}
+          className="absolute pointer-events-none select-none"
           style={{
-            background: `radial-gradient(
-              ellipse 62% 52% at center,
-              rgba(255, 255, 255, 0.02) 0%,
-              rgba(0, 0, 0, 0.01) 40%,
-              rgba(0, 0, 0, 0.04) 100%
-            )`,
+            left: `${item.x}%`,
+            top: `${item.y}%`,
+            transform: `translate(-50%, -50%) rotate(${item.rotation}deg)`,
+            fontSize: `${item.size}px`,
+            opacity: item.opacity,
+            lineHeight: 1,
           }}
-        />
-      </div>
-      {/*
-      <div
-        className="absolute inset-0 overflow-hidden pointer-events-none"
-        style={{ zIndex: 30 }}
-      >
-         {foregroundEmojis.map((item) => (
-          <div
-            key={item.id}
-            className="absolute pointer-events-none select-none"
-            style={{
-              left: `${item.x}%`,
-              top: `${item.y}%`,
-              transform: `translate(-50%, -50%) rotate(${item.rotation}deg)`,
-              fontSize: `${item.size}px`,
-              opacity: item.opacity,
-              filter: `drop-shadow(0 2px 8px rgba(0,0,0,0.2))`,
-              userSelect: "none",
-              transformOrigin: "center center",
-              mixBlendMode: "lighten",
-            }}
-            aria-hidden="true"
-          >
-            {emoji}
-          </div>
-        ))} 
-      </div>
-      */}
-    </>
+          aria-hidden="true"
+        >
+          {emoji}
+        </span>
+      ))}
+    </div>
   );
 }
 
-// 4. Wrap the export in 'memo'
-// This prevents re-renders unless props (emoji, bgColor, density) change.
 export const EmojiBackground = memo(EmojiBackgroundComponent);

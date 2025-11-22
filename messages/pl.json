@@ -1,0 +1,48 @@
+{
+  "HOMEPAGE": {
+    "HERO": {
+      "TITLE": "Twórz zaproszenia, które żyją.",
+      "SUBTITLE": "Wybierz styl, wyślij zaproszenie, sprawdź, kto przyjdzie, kto nie (i kto jeszcze się zastanawia).",
+      "CTA": "Zaproś ze stylem"
+    },
+    "FEATURES": {
+      "TITLE": "Funkcje, które rządzą",
+      "SUBTITLE": "Dlaczego zadowalać się zwykłym zaproszeniem, skoro możesz stworzyć dzieło sztuki?",
+      "FEATURE1": {
+        "TITLE": "Dopasuj do siebie",
+        "COPY": "Dopasuj swoje zaproszenie jak chcesz: wybierz kolory, czcionki i idealny wygląd dla siebie."
+      },
+      "FEATURE2": {
+        "TITLE": "Wybierz emoji",
+        "COPY": "Postaw na emoji, które robi największe wrażenie, bo jedno emoji mówi więcej niż tysiąc słów."
+      },
+      "FEATURE3": {
+        "TITLE": "Zarządzaj odpowiedziami jak prawdziwy szef",
+        "COPY": "Kto odpowiada? Ilu przyjaciół zabiorą? A ile małych szkrabów? Nic nie zostawiamy przypadkowi: to Ty decydujesz, kto zasługuje na obecność, kto może przyprowadzić znajomych, a czy maluchy są mile widziane."
+      }
+    },
+    "CARDS": {
+      "1": {
+        "NAME": "Oweenowa impreza",
+        "LOCATION": "Nawiedzony Dwór"
+      },
+      "2": {
+        "NAME": "Impreza Świąteczna",
+        "LOCATION": "Zimowa Chata"
+      },
+      "3": {
+        "NAME": "Impreza sylwestrowa",
+        "LOCATION": "Sala Skyline"
+      }
+    }
+  },
+  "COMMON": {
+    "LOGIN": "Zaloguj się",
+    "GOOGLE": "Zaloguj się przez Google",
+    "LOGINTOCONTINUE": "Zaloguj się, aby kontynuować",
+    "FACEBOOK": "Zaloguj się przez Facebook"
+  },
+  "PROFILE": {
+    "NAME": "Pełne imię i nazwisko"
+  }
+}

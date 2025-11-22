@@ -6,7 +6,7 @@
 
 @theme inline {
   --font-bagel: var(--font-bagel);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-poppins);
   --font-poppins: var(--font-poppins);
 }
 
@@ -64,7 +64,7 @@
   --secondary-foreground: oklch(0.37 0.03 259.73);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.55 0.02 264.41);
-  --accent: oklch(0.89 0.06 9.32);
+  --accent: oklch(0.92 0 0);
   --accent-foreground: oklch(0.37 0.03 259.73);
   --destructive: oklch(0.64 0.21 25.39);
   --border: oklch(0.87 0.01 261.81);
@@ -226,8 +226,22 @@
     @apply shrink-0 font-bagel text-primary tracking-tightest
   }
 
-  h1, h2, h3 {
-    @apply font-poppins tracking-tighter;
+  /*HEADINGS*/
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 leading-none md:leading-tight;
   }
 
+  h2 {
+    @apply text-2xl md:text-3xl lg:text-4xl font-semibold mb-3 leading-snug;
+  }
+
+  h3 {
+    @apply text-base md:text-lg font-medium mb-2 leading-snug;
+  }
+
+  /*BUTTONS*/
+  .cta-home {
+    @apply !px-12 !py-6 !shadow-xl !border-b-4 !bg-primary/90 !border-primary !font-medium;
+  }
 }
