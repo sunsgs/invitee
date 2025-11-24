@@ -33,7 +33,7 @@ export function FloatingError({
       <AlertCircle className="w-3.5 h-3.5 stroke-[2.5] shrink-0 text-background" />
       <span
         className={cn(
-          "text-xs font-bold whitespace-nowrap",
+          "text-sm font-medium whitespace-nowrap",
           isBackgroundDark ? "text-red" : "text-background"
         )}
       >

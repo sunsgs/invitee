@@ -119,7 +119,7 @@ const AutoResizingTextarea = React.forwardRef(function AutoResizingTextarea(
       onInput={handleInput}
       onPaste={handlePaste}
       style={{
-        lineHeight: "1.5",
+        // lineHeight: "1.5",
         ...props.style,
       }}
     />

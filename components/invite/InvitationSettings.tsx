@@ -41,7 +41,7 @@ export const InvitationSettings = ({
       <CardContent className="p-8">
         <FieldGroup>
           <FieldSet>
-            <h2>Customize your invite</h2>
+            <h3>Customize your invite</h3>
             <div className="space-y-4">
               {/* RSVP Section */}
               <div className="space-y-4">

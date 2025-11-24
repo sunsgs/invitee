@@ -186,7 +186,7 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
-  --tracking-tightest: -0.060em;
+  --tracking-tightest: -0.040em;
 }
 
 @layer base {
@@ -229,15 +229,15 @@
   /*HEADINGS*/
 
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 leading-none md:leading-tight;
+    @apply text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 tracking-tightest md:leading-tight;
   }
 
   h2 {
-    @apply text-2xl md:text-3xl lg:text-4xl font-semibold mb-3 leading-snug;
+    @apply text-2xl md:text-3xl lg:text-4xl font-semibold mb-3 tracking-tightest;
   }
 
   h3 {
-    @apply text-base md:text-lg font-medium mb-2 leading-snug;
+    @apply text-xl md:text-2xl font-semibold mb-2 tracking-tightest;
   }
 
   /*BUTTONS*/

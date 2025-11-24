@@ -1,9 +1,9 @@
+import DeleteAccountDialog from "@/components/profile/Delete-account";
 import EditProfile from "@/components/profile/edit-profile";
 import LanguageSelector from "@/components/profile/Language-selector";
 import { Separator } from "@/components/ui/separator";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import DeleteAccountDialog from "../../../../components/profile/Delete-account";
 
 export default async function AccountSettingsPage() {
   const session = await auth.api.getSession({

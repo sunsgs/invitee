@@ -10,9 +10,7 @@ export default function FeatureSection() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-32 text-center">
-          <h2 className="font-bold text-5xl tracking-tight mb-6">
-            {t("TITLE")}
-          </h2>
+          <h2 className="mb-6">{t("TITLE")}</h2>
           <p className="text-lg">{t("SUBTITLE")}</p>
         </div>
 
@@ -26,20 +24,16 @@ export default function FeatureSection() {
               <Type className="h-8 w-8" />
             </div>
             <div className="order-1 md:order-2 space-y-6">
-              <h3 className="text-4xl font-bold tracking-tight">
-                {t("FEATURE1.TITLE")}
-              </h3>
-              <p className="text-lg">{t("FEATURE1.COPY")}</p>
+              <h3>{t("FEATURE1.TITLE")}</h3>
+              <p className="leading-relaxed">{t("FEATURE1.COPY")}</p>
             </div>
           </div>
 
           {/* Feature 2 - Emoji */}
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
-              <h3 className="text-4xl font-bold tracking-tight">
-                {t("FEATURE2.TITLE")}
-              </h3>
-              <p className="text-lg ">{t("FEATURE2.COPY")}</p>
+              <h3>{t("FEATURE2.TITLE")}</h3>
+              <p className="leading-relaxed">{t("FEATURE2.COPY")}</p>
             </div>
             <div className="relative h-64 w-64 mx-auto">
               {/* Center emoji */}
@@ -122,20 +116,17 @@ export default function FeatureSection() {
               </div>
             </div>
             <div className="order-1 md:order-2 space-y-6">
-              <h3 className="text-3xl font-bold tracking-tight leading-tight">
-                {t("FEATURE3.TITLE")}
-              </h3>
-              <p className="text-lg text-neutral-600 leading-relaxed">
-                {t("FEATURE3.COPY")}
-              </p>
+              <h3>{t("FEATURE3.TITLE")}</h3>
+              <p className="leading-relaxed">{t("FEATURE3.COPY")}</p>
             </div>
           </div>
         </div>
 
         <div className="mt-24 md:mt-48 text-center">
-          <p className="text-2xl font-light tracking-tight">
+          <p className="text-lg">
             E poi? Condividi il tuo invito nel mondo, ovunque,
-            <span className="font-medium">come un meme virale.</span>
+            <br />
+            come un meme virale.
           </p>
         </div>
         <div className="flex w-full items-center justify-center">

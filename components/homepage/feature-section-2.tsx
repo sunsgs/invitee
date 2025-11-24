@@ -95,7 +95,7 @@ export default function FeatureSection2() {
                   <div className="w-12 h-12 rounded-2xl bg-foreground/30 backdrop-blur-sm flex items-center justify-center border border-opacity-30">
                     <PartyPopper className="w-6 h-6" />
                   </div>
-                  <h2 className="text-3xl font-semibold">Pick Your Emoji</h2>
+                  <h2 className="">Pick Your Emoji</h2>
                 </div>
 
                 <p className="leading-relaxed mb-6">

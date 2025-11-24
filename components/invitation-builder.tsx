@@ -103,6 +103,25 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
     }
   };
 
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Check this out",
+          text: "Some description here",
+          url: window.location.href,
+        });
+        console.log("Shared successfully");
+      } catch (err) {
+        // User cancelled or share failed
+        console.log("Share failed:", err);
+      }
+    } else {
+      // Fallback - copy to clipboard or show your own share modal
+      console.log("Web Share API not supported");
+    }
+  };
+
   // Watch only what we need for preview
   const title = watch("title");
   const name = watch("name");
@@ -155,7 +174,7 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
         onEmojiDensityChange={(density) =>
           setValue("emojiDensity", density, { shouldDirty: true })
         }
-        onShare={() => alert("Share feature coming soon")}
+        onShare={() => handleShare()}
       />
 
       <div className="w-full mb-10">

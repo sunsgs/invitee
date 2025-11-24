@@ -68,59 +68,37 @@ export function InvitationCard({
       )}
 
       <CardContent
-        className="relative z-20 flex h-full flex-col items-center justify-center pt-12 pb-8 px-12"
+        className="relative z-20 flex h-full flex-col items-center justify-center px-8 py-16"
         style={{ color: textColor, fontFamily }}
       >
         {/* Title / Heading */}
-        <div className="font-semibold text-7xl w-full text-center tracking-wide">
-          {/* {isEditing ? (
-            <Controller
-              name="title"
-              control={control}
-              render={({ field }) => (
-                <div className="relative group w-full " id="event-title">
-                  <input
-                    {...field}
-                    value={field.value ?? ""} // convert null/undefined to empty string
-                    aria-invalid={errors?.title ? "true" : "false"}
-                    className="w-full focus:outline-none transition-all duration-200"
-                    placeholder="your title"
-                    autoComplete="off"
-                  />
-                  <PencilIconInput />
-                </div>
-              )}
-            />
-          ) : (
-            <div className="w-full" role="heading" aria-level={3}>
-              {data.title}
-            </div>
-          )} */}
-          {emoji}
-        </div>
+        <div className="font-semibold text-6xl w-full text-center">{emoji}</div>
 
         {/* Name */}
-        <div className="w-full font-black leading-none text-6xl md:text-6xl  text-center focus:outline-none transition-all my-8">
+        <div className="relative w-full font-black leading-none text-5xl md:text-6xl  text-center focus:outline-none transition-all my-8">
           {isEditing ? (
-            <Controller
-              name="name"
-              control={control}
-              render={({ field }) => (
-                <div className="relative group w-full">
-                  <AutoResizingTextarea
-                    style={{ color: textColor, fontFamily }}
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    maxLines={2}
-                    aria-invalid={errors?.name ? "true" : "false"}
-                    className="w-full focus:outline-none transition-all resize-none overflow-hidden text-center"
-                    placeholder="Name"
-                    autoComplete="off"
-                  />
-                  <FloatingError error={errors?.name} bgColor={bgColor} />
-                </div>
-              )}
-            />
+            <>
+              <Controller
+                name="name"
+                control={control}
+                render={({ field }) => (
+                  <div className="relative group w-full">
+                    <AutoResizingTextarea
+                      style={{ color: textColor, fontFamily }}
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      maxLines={2}
+                      aria-invalid={errors?.name ? "true" : "false"}
+                      className="w-full focus:outline-none transition-all resize-none overflow-hidden text-center leading-normal"
+                      placeholder="Name"
+                      autoComplete="off"
+                    />
+                    <FloatingError error={errors?.name} bgColor={bgColor} />
+                  </div>
+                )}
+              />
+              <PencilIconInput />
+            </>
           ) : (
             <div className="w-full" aria-label="Name">
               {data.name}
@@ -129,9 +107,10 @@ export function InvitationCard({
         </div>
 
         {/* Date and Time Picker */}
-        <div className="mb-6 w-full text-center flex text-lg items-center justify-center group relative">
+        <div className="mb-6 w-full text-center flex flex-col md:flex-row text-lg items-center justify-center group relative gap-2 md:gap-4">
           {isEditing ? (
-            <div className="flex">
+            <>
+              {" "}
               {/* Date Controller */}
               <Controller
                 name="date"
@@ -158,7 +137,7 @@ export function InvitationCard({
                   };
 
                   return (
-                    <div className="w-full focus:outline-none transition-all duration-200">
+                    <div className="flex focus:outline-none transition-all duration-200">
                       <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
                         <PopoverTrigger asChild>
                           <Button
@@ -209,7 +188,6 @@ export function InvitationCard({
                   );
                 }}
               />
-
               {control && (
                 <TimeToggle
                   label="Start Time"
@@ -221,7 +199,6 @@ export function InvitationCard({
                   isSubmitting={false}
                 />
               )}
-
               {isStartTimeSet && control && (
                 <TimeToggle
                   label="End Time"
@@ -234,7 +211,7 @@ export function InvitationCard({
                 />
               )}
               <PencilIconInput />
-            </div>
+            </>
           ) : (
             <div aria-label="Event Date and Time " className="text-lg">
               {data.date

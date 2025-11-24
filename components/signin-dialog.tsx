@@ -100,9 +100,6 @@ export default function SignInDialog({
                         onRequest: () => {
                           setLoading(true);
                         },
-                        onResponse: () => {
-                          setLoading(false);
-                        },
                         onError: () => {
                           setLoading(false);
                         },
