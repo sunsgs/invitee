@@ -83,7 +83,7 @@ export function InviteCard({ invite }: InviteCardProps) {
 
           {/* Right: Action Buttons */}
           <div className="hidden sm:flex items-center gap-2 ">
-            <Button asChild>
+            <Button asChild variant={"ghost"}>
               <Link href={`invites/${invite.id}/stats`}>
                 <BarChart3 className="h-4 w-4" />
                 <span className="text-sm">Stats</span>

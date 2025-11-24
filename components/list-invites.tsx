@@ -24,7 +24,12 @@ export default function ListInvites({ data }: ListInvitesProps) {
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">
             Invites
           </h1>
-          <Button asChild={canCreate} disabled={!canCreate} size={"lg"}>
+          <Button
+            className="justify-center items-center flex"
+            asChild={canCreate}
+            disabled={!canCreate}
+            size={"lg"}
+          >
             <Link href="invites/create">
               <span className="text-lg leading-none">+</span>
               <span className="hidden sm:inline">Create invite</span>

@@ -204,7 +204,7 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
           />
 
           <Field>
-            <h3 className="m-0">Notes/Description</h3>
+            <p>Notes/Description</p>
             <Textarea
               className="bg-card rounded-2xl p-4 focus:outline-none focus-visible:border-foreground focus-visible:ring-[0]"
               id="description"

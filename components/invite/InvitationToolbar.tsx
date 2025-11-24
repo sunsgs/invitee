@@ -114,33 +114,19 @@ export const InvitationToolbar = ({
             //   </DialogContent>
             // </Dialog>
             <Button
-              variant="ghost"
-              size="icon"
+              variant="outline"
+              size="icon-lg"
               onClick={onShare}
               aria-label="Share invitation"
-              className="
-                h-10 w-10 sm:h-11 sm:w-11
-                rounded-full
-                text-muted-foreground
-                hover:text-foreground hover:bg-muted
-                active:scale-95
-                transition-all
-              "
             >
-              <Share className="h-[18px] w-[18px]" />
+              <Share size={18} />
             </Button>
           )}
 
-          <Button
-            type="submit"
-            form="invitation-form"
-            disabled={isSubmitting}
-            className="py-6 px-8 font-medium"
-          >
+          <Button type="submit" form="invitation-form" disabled={isSubmitting}>
             {isSubmitting ? (
               <span className="flex items-center gap-2">
                 <Spinner className="h-4 w-4" />
-                <span className="sr-only sm:not-sr-only">Saving</span>
               </span>
             ) : (
               "Save"

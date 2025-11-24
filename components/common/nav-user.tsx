@@ -30,33 +30,33 @@ export default function NavUser() {
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
           {user?.image && <AvatarImage src={user?.image} alt={user?.name} />}
-          <AvatarFallback className="bg-accent rounded-lg text-sm">
+          <AvatarFallback className="bg-accent rounded-lg ">
             {getInitials(user?.name || "")}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-0" align="end">
         <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-2">
-            <p className="text-sm font-semibold leading-none">{user?.name}</p>
+          <div className="flex flex-col py-2">
+            <p className=" font-semibold leading-none">{user?.name}</p>
             <p className="text-xs leading-none text-muted-foreground">
               {user?.email}
             </p>
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="m-0" />
         <DropdownMenuGroup>
           <DropdownMenuItem
-            className="cursor-pointer rounded-none"
+            className="cursor-pointer py-2 rounded-none"
             onClick={() => router.push("/user/profile")}
           >
             <User className="mr-2 h-4 w-4" />
-            <span>Profile and Settings</span>
+            <span>Profile</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="m-0" />
         <DropdownMenuItem
-          className="text-primary cursor-pointer"
+          className="cursor-pointer text-primary py-2 rounded-none"
           onClick={handleSignOut}
         >
           <LogOut className="mr-2 h-4 w-4" />

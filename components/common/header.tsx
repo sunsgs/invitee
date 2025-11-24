@@ -14,7 +14,7 @@ export function Header() {
   const { data: session } = authClient.useSession();
   const isAnonymous = session?.user.isAnonymous;
   return (
-    <header className="flex justify-between items-center w-full px-4 py-2 border-b mb-4 bg-background ">
+    <header className="flex justify-between items-center relative w-full my-4 max-w-7xl mx-auto px-4">
       <div className="shrink-0 font-bagel text-4xl text-primary tracking-tightest">
         <Link href={"/user/invites"}>SMOOU</Link>
       </div>
@@ -24,8 +24,11 @@ export function Header() {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuLink asChild>
-                    <Link href="/user/invites">my invites</Link>
+                  <NavigationMenuLink
+                    className="underline font-semibold"
+                    asChild
+                  >
+                    <Link href="/user/invites">My invites</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
