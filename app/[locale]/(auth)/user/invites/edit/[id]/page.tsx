@@ -11,7 +11,6 @@ export default async function Page({
     where: (invite, { eq }) => eq(invite.id, id),
   });
 
-  console.log(result);
   if (result) {
     const {
       bgColor,

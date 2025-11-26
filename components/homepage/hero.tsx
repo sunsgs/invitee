@@ -1,17 +1,11 @@
 "use client";
-import { authClient, signIn } from "@/lib/auth-client";
-import { AnimatePresence, Easing, motion } from "motion/react";
+import { Easing, motion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { InvitationCard } from "../invitation-card";
-import LogoLoader from "../loader/Logo-loader";
-import { Button } from "../ui/button";
+import CTAhero from "./cta";
 
 export default function Hero() {
   const t = useTranslations("HOMEPAGE");
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
 
   const invitations = [
     {
@@ -64,32 +58,6 @@ export default function Hero() {
   const totalRotation = 35;
   const rotationInterval = totalRotation / (totalCards - 1);
 
-  const handleGetStarted = async () => {
-    try {
-      setIsLoading(true);
-
-      const { data: session } = await authClient.getSession();
-
-      if (session) {
-        router.push("/user/invites/create");
-        return;
-      }
-
-      await signIn.anonymous({
-        fetchOptions: {
-          onRequest: () => {
-            console.log("requested");
-          },
-        },
-      });
-
-      router.push("/user/invites/create");
-    } catch (error) {
-      console.error("Authentication error:", error);
-      setIsLoading(false);
-    }
-  };
-
   return (
     <>
       <motion.div
@@ -132,13 +100,7 @@ export default function Hero() {
             transition={{ duration: 1.8, delay: 1.2, ease: EASE }}
             className="mt-2"
           >
-            <Button
-              onClick={handleGetStarted}
-              disabled={isLoading}
-              className="shadow-xl bg-primary/90 hover:bg-primary/80 px-12 py-6 border-b-4 border-primary font-medium text-lg disabled:opacity-70 disabled:cursor-not-allowed transition-all"
-            >
-              {t("HERO.CTA")}
-            </Button>
+            <CTAhero />
           </motion.div>
           <div className="w-full flex items-center">
             <div className="flex w-full justify-center relative min-h-[400] md:min-h-[500] scale-85 md:scale-90 lg:scale-100 mt-2 md:mt-4 lg:mt-8 xl:mt-16">
@@ -197,9 +159,6 @@ export default function Hero() {
           </div>
         </div>
       </motion.div>
-
-      {/* Full-screen loading overlay - Airbnb style */}
-      <AnimatePresence>{isLoading && <LogoLoader />}</AnimatePresence>
     </>
   );
 }

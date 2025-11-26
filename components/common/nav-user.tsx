@@ -30,14 +30,14 @@ export default function NavUser() {
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
           {user?.image && <AvatarImage src={user?.image} alt={user?.name} />}
-          <AvatarFallback className="bg-accent rounded-lg ">
+          <AvatarFallback className="bg-accent rounded-lg text-xs">
             {getInitials(user?.name || "")}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-0" align="end">
         <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col py-2">
+          <div className="flex flex-col py-2 gap-1">
             <p className=" font-semibold leading-none">{user?.name}</p>
             <p className="text-xs leading-none text-muted-foreground">
               {user?.email}
@@ -47,7 +47,7 @@ export default function NavUser() {
         <DropdownMenuSeparator className="m-0" />
         <DropdownMenuGroup>
           <DropdownMenuItem
-            className="cursor-pointer py-2 rounded-none"
+            className="cursor-pointer py-4 rounded-none font-medium"
             onClick={() => router.push("/user/profile")}
           >
             <User className="mr-2 h-4 w-4" />
@@ -56,10 +56,10 @@ export default function NavUser() {
         </DropdownMenuGroup>
         <DropdownMenuSeparator className="m-0" />
         <DropdownMenuItem
-          className="cursor-pointer text-primary py-2 rounded-none"
+          className="cursor-pointer py-4 rounded-none text-primary font-medium"
           onClick={handleSignOut}
         >
-          <LogOut className="mr-2 h-4 w-4" />
+          <LogOut className="text-primary mr-2 h-4 w-4" />
           <span>Log out </span>
         </DropdownMenuItem>
       </DropdownMenuContent>

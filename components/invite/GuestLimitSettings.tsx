@@ -80,8 +80,16 @@ export const GuestLimitSettings = ({
 
             <Field>
               <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <h2>Track babies separately</h2>
+                <div className="flex-1 min-w-0">
+                  <FieldLabel
+                    htmlFor="isMaxGuestsCountEnabled"
+                    className="text-base font-medium"
+                  >
+                    Track babies separately
+                  </FieldLabel>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Maximum guests each invitee can bring
+                  </p>
                 </div>
                 <Switch
                   id="enableBabyCount"

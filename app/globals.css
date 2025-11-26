@@ -222,6 +222,10 @@
     @apply !font-bold text-xl;
   }
 
+  button {
+    @apply !rounded-full;
+  }
+
   .logo {
     @apply shrink-0 font-bagel text-primary tracking-tightest
   }

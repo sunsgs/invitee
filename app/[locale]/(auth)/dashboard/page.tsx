@@ -46,7 +46,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 
 type User = {
   id: string;
@@ -159,7 +159,6 @@ export default function AdminDashboard() {
 
   return (
     <div className="container mx-auto p-4 space-y-8">
-      <Toaster richColors />
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-2xl">Admin Dashboard</CardTitle>

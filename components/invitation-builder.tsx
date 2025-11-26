@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { InvitationCard } from "@/components/invitation-card";
 import { Field, FieldDescription } from "@/components/ui/field";
@@ -14,6 +14,8 @@ import { InvitationCardData, InviteFormData } from "@/validation/schema";
 import { saveInvitation } from "@/actions/invitationActions";
 import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 import { useInvitationForm } from "@/hooks/useInvitationForm";
+import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 import { InvitationSettings } from "./invite/InvitationSettings";
 import { InvitationToolbar } from "./invite/InvitationToolbar";
 import SignInDialog from "./signin-dialog";
@@ -37,6 +39,7 @@ interface InvitationBuilderProps {
 export default function InvitationBuilder(props: InvitationBuilderProps) {
   const { data: session } = authClient.useSession();
   const router = useRouter();
+  const t = useTranslations();
 
   const {
     callbackURL,
@@ -47,6 +50,7 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
   } = useAuthRedirect();
 
   const form = useInvitationForm(props);
+  const hasSavedPendingRef = useRef(false);
 
   const {
     register,
@@ -58,13 +62,16 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
     formState: { errors, isSubmitting },
   } = form;
 
-  // When pending data arrives, reset form with it
+  // Auto-save when pendingData arrives after authentication
   useEffect(() => {
-    if (pendingData) {
+    if (pendingData && !hasSavedPendingRef.current) {
+      hasSavedPendingRef.current = true;
+
+      // Reset form with pending data first
       reset({
         title: pendingData.title,
         name: pendingData.name,
-        date: pendingData.date,
+        date: new Date(pendingData.date),
         startTime: pendingData.startTime,
         endTime: pendingData.endTime,
         location: pendingData.location,
@@ -80,26 +87,50 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
         maxGuestsNumber: pendingData.maxGuestsNumber,
         maxGuestsBabyNumber: pendingData.maxGuestsBabyNumber,
       });
+
+      // Immediately trigger save with pending data
+      (async () => {
+        try {
+          await saveInvitation({
+            data: { ...pendingData, date: new Date(pendingData.date) },
+            inviteId: props.inviteId,
+            onSuccess: (result) => {
+              toast.success(t(`${result.status}`));
+              router.push(`/user/invites/edit/${result.id}`);
+            },
+          });
+        } catch (error) {
+          if (error instanceof Error) {
+            let messageToDisplay = error.message;
+            toast.error(t(messageToDisplay));
+          }
+          return;
+        }
+      })();
     }
   }, [pendingData, reset]);
 
   const onSubmit = async (data: InviteFormData) => {
     try {
+      console.log(session?.user);
       await saveInvitation({
         data,
         inviteId: props.inviteId,
         isAnonymous: session?.user.isAnonymous || undefined,
-        onSuccess: (inviteId) => {
-          if (!inviteId) {
-            router.push("/user/invites");
+        onSuccess: (result) => {
+          toast.success(t(result.status));
+          if (result.status === "SUCCESS.INVITE.UPDATED") {
+            router.push(`/user/invites/edit/${result.id}`);
           }
         },
+
         onAnonymous: () => {
           savePendingAction(data);
         },
       });
-    } catch (error) {
-      console.error("Save error:", error);
+    } catch (error: any) {
+      toast.error(t(error));
+      return;
     }
   };
 
@@ -111,9 +142,7 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
           text: "Some description here",
           url: window.location.href,
         });
-        console.log("Shared successfully");
       } catch (err) {
-        // User cancelled or share failed
         console.log("Share failed:", err);
       }
     } else {
@@ -191,7 +220,6 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
             textColor={textColor || "#000"}
             fontValue={fontValue || "bagel"}
             emoji={previewEmoji || ""}
-            // emojiIntensity={emojiDensity || 2}
             emojiIntensity={1}
             data={{
               title,

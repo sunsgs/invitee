@@ -44,5 +44,14 @@
   },
   "PROFILE": {
     "NAME": "Pełne imię i nazwisko"
+  },
+  "ERRORS": {
+    "INVITE_LIMIT_REACHED": "Hai raggiunto il massimo numero di inviti che puoi creare"
+  },
+  "SUCCESS": {
+    "INVITE": {
+      "CREATED": "Invito creato",
+      "UPDATED": "Invito aggiornato"
+    }
   }
 }

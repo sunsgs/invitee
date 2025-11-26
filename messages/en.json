@@ -44,5 +44,14 @@
   },
   "PROFILE": {
     "NAME": "Full name"
+  },
+  "ERRORS": {
+    "INVITE_LIMIT_REACHED": "You reached invites limit creation"
+  },
+  "SUCCESS": {
+    "INVITE": {
+      "CREATED": "Invite created",
+      "UPDATED": "Invite updated"
+    }
   }
 }

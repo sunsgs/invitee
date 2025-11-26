@@ -1,7 +1,6 @@
 import { CheckCircle, PaintBucket, Palette, Type, User } from "lucide-react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
-import { Button } from "../ui/button";
+import CTAhero from "./cta";
 
 export default function FeatureSection() {
   const t = useTranslations("HOMEPAGE.FEATURES");
@@ -130,9 +129,7 @@ export default function FeatureSection() {
           </p>
         </div>
         <div className="flex w-full items-center justify-center">
-          <Button className="px-12 py-6 mt-4 shadow-xl text-xl border-b-4 bg-primary/90 border-primary">
-            <Link href="#">Invita con stile</Link>
-          </Button>
+          <CTAhero />
         </div>
       </div>
     </section>
