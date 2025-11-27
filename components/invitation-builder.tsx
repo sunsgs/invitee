@@ -8,7 +8,6 @@ import { Field, FieldDescription } from "@/components/ui/field";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { authClient } from "@/lib/auth-client";
-import { getEmojiUnicode } from "@/lib/utils";
 import { InvitationCardData, InviteFormData } from "@/validation/schema";
 
 import { saveInvitation } from "@/actions/invitationActions";
@@ -25,8 +24,6 @@ interface InvitationBuilderProps {
   inviteBgColor?: string;
   inviteTextColor?: string;
   inviteFontValue?: string;
-  inviteEmoji?: string;
-  inviteEmojiDensity?: number;
   data?: InvitationCardData;
   inviteRSVPRequired?: boolean;
   inviteIsMaxGuestsCountEnabled?: boolean;
@@ -34,6 +31,7 @@ interface InvitationBuilderProps {
   inviteMaxGuestsBabyNumber?: number;
   inviteMaxGuestsNumber?: number;
   inviteDescription?: string;
+  inviteIconId?: string;
 }
 
 export default function InvitationBuilder(props: InvitationBuilderProps) {
@@ -79,13 +77,12 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
         bgColor: pendingData.bgColor,
         textColor: pendingData.textColor,
         fontValue: pendingData.fontValue,
-        emoji: pendingData.emoji,
-        emojiDensity: pendingData.emojiDensity,
         rsvpRequired: pendingData.rsvpRequired,
         isMaxGuestsCountEnabled: pendingData.isMaxGuestsCountEnabled,
         isBabyCountEnabled: pendingData.isBabyCountEnabled,
         maxGuestsNumber: pendingData.maxGuestsNumber,
         maxGuestsBabyNumber: pendingData.maxGuestsBabyNumber,
+        iconId: pendingData.iconId,
       });
 
       // Immediately trigger save with pending data
@@ -111,8 +108,8 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
   }, [pendingData, reset]);
 
   const onSubmit = async (data: InviteFormData) => {
+    console.log(data);
     try {
-      console.log(session?.user);
       await saveInvitation({
         data,
         inviteId: props.inviteId,
@@ -161,15 +158,12 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
   const bgColor = watch("bgColor");
   const textColor = watch("textColor");
   const fontValue = watch("fontValue");
-  const emoji = watch("emoji");
-  const emojiDensity = watch("emojiDensity");
   const rsvpRequired = watch("rsvpRequired");
   const isMaxGuestsCountEnabled = watch("isMaxGuestsCountEnabled");
   const isBabyCountEnabled = watch("isBabyCountEnabled");
   const maxGuestsNumber = watch("maxGuestsNumber");
   const maxGuestsBabyNumber = watch("maxGuestsBabyNumber");
-
-  const previewEmoji = Array.isArray(emoji) ? emoji[0] : emoji;
+  const iconId = watch("iconId");
 
   return (
     <div className="flex mb-10">
@@ -184,24 +178,18 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
         bgColor={bgColor || "#fff"}
         textColor={textColor || "#000"}
         fontValue={fontValue || "bagel"}
-        selectedEmoji={previewEmoji || ""}
-        emojiDensity={emojiDensity || 2}
+        selectedIcon={iconId || ""}
         isSubmitting={isSubmitting}
         inviteId={props.inviteId}
         onBgColorChange={(color) =>
           setValue("bgColor", color, { shouldDirty: true })
         }
+        onIconSelect={(id) => setValue("iconId", id, { shouldDirty: true })}
         onTextColorChange={(color) =>
           setValue("textColor", color, { shouldDirty: true })
         }
         onFontChange={(font) =>
           setValue("fontValue", font, { shouldDirty: true })
-        }
-        onEmojiSelect={(shortcode) =>
-          setValue("emoji", getEmojiUnicode(shortcode), { shouldDirty: true })
-        }
-        onEmojiDensityChange={(density) =>
-          setValue("emojiDensity", density, { shouldDirty: true })
         }
         onShare={() => handleShare()}
       />
@@ -219,8 +207,7 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
             bgColor={bgColor || "#fff"}
             textColor={textColor || "#000"}
             fontValue={fontValue || "bagel"}
-            emoji={previewEmoji || ""}
-            emojiIntensity={1}
+            iconId={iconId || ""}
             data={{
               title,
               name,

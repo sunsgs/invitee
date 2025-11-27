@@ -169,6 +169,13 @@
       "when": 1763677557087,
       "tag": "0023_thin_thunderbird",
       "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "6",
+      "when": 1764199402318,
+      "tag": "0024_fantastic_mantis",
+      "breakpoints": true
     }
   ]
 }

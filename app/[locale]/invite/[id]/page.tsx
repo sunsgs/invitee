@@ -23,21 +23,19 @@ export default async function Page({
       name,
       location,
       date,
-      emoji,
+      iconId,
       startTime,
       endTime,
-      emojiDensity,
     } = result;
 
     return (
       <main className="max-w-2xl mx-auto px-4 pb-16 mt-16 relative">
         <section>
           <InvitationCard
-            emoji={emoji || ""}
+            iconId={iconId || ""}
             bgColor={bgColor}
             textColor={textColor}
             fontValue={fontValue}
-            emojiIntensity={emojiDensity || 2}
             data={{
               title: title || "",
               location: location || "",

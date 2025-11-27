@@ -11,8 +11,7 @@ interface UseInvitationFormProps {
   inviteBgColor?: string;
   inviteTextColor?: string;
   inviteFontValue?: string;
-  inviteEmoji?: string;
-  inviteEmojiDensity?: number;
+  inviteIconId?: string;
   data?: InvitationCardData;
   inviteRSVPRequired?: boolean;
   inviteIsMaxGuestsCountEnabled?: boolean;
@@ -39,8 +38,7 @@ export const useInvitationForm = (props: UseInvitationFormProps) => {
       bgColor: props.inviteBgColor || "#fff",
       textColor: props.inviteTextColor || "#000",
       fontValue: props.inviteFontValue || "bagel",
-      emoji: props.inviteEmoji || "",
-      emojiDensity: props.inviteEmojiDensity || 2,
+      iconId: props.inviteIconId || "",
 
       // RSVP settings
       rsvpRequired: props.inviteRSVPRequired || false,

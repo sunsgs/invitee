@@ -1,23 +1,21 @@
 import { ColorPickerPopover } from "@/components/color-picker-popover";
-import { EmojiBackgroundPicker } from "@/components/Emoji-picker";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { Baseline, PaintBucket, Share } from "lucide-react";
 import { FontSelector } from "../font-selector";
+import IconPicker from "./Emoji-svg-picker";
 
 interface InvitationToolbarProps {
   bgColor: string;
   textColor: string;
   fontValue: string;
-  selectedEmoji: string;
-  emojiDensity: number;
+  selectedIcon: string;
   isSubmitting: boolean;
   inviteId?: string;
   onBgColorChange: (color: string) => void;
   onTextColorChange: (color: string) => void;
   onFontChange: (font: string) => void;
-  onEmojiSelect: (emoji: string) => void;
-  onEmojiDensityChange: (density: number) => void;
+  onIconSelect: (iconId: string) => void;
   onShare?: () => void;
 }
 
@@ -29,15 +27,13 @@ export const InvitationToolbar = ({
   bgColor,
   textColor,
   fontValue,
-  selectedEmoji,
-  emojiDensity,
+  selectedIcon,
   isSubmitting,
   inviteId,
   onBgColorChange,
   onTextColorChange,
   onFontChange,
-  onEmojiSelect,
-  onEmojiDensityChange,
+  onIconSelect,
   onShare,
 }: InvitationToolbarProps) => {
   return (
@@ -48,7 +44,7 @@ export const InvitationToolbar = ({
           role="toolbar"
           aria-label="Invitation styling tools"
         >
-          {/* Color Tools Group */}
+          {/* Color Tools */}
           <ColorPickerPopover
             color={bgColor}
             onColorChange={onBgColorChange}
@@ -63,56 +59,22 @@ export const InvitationToolbar = ({
             icon={<Baseline className="h-[18px] w-[18px]" />}
             label="Text"
           />
-
           <ToolDivider />
 
           {/* Typography */}
           <FontSelector value={fontValue} onValueChange={onFontChange} />
-
           <ToolDivider />
 
-          {/* Decoration */}
-          <EmojiBackgroundPicker
-            onEmojiSelect={onEmojiSelect}
-            selectedEmoji={selectedEmoji}
+          {/* New Unified Icon Picker */}
+          <IconPicker
+            selectedIconId={selectedIcon}
+            onIconSelect={onIconSelect}
           />
         </div>
 
         {/* Actions */}
         <div className="flex items-center gap-1.5 sm:gap-2">
           {inviteId && (
-            // <Dialog>
-            //   <DialogTrigger asChild>
-            //     <Button variant="outline">Share</Button>
-            //   </DialogTrigger>
-            //   <DialogContent className="sm:max-w-md">
-            //     <DialogHeader>
-            //       <DialogTitle>Share link</DialogTitle>
-            //       <DialogDescription>
-            //         Anyone who has this link will be able to view this.
-            //       </DialogDescription>
-            //     </DialogHeader>
-            //     <div className="flex items-center gap-2">
-            //       <div className="grid flex-1 gap-2">
-            //         <Label htmlFor="link" className="sr-only">
-            //           Link
-            //         </Label>
-            //         <Input
-            //           id="link"
-            //           defaultValue={`${process.env.NEXT_PUBLIC_APP_URL}/invites/${inviteId}`}
-            //           readOnly
-            //         />
-            //       </div>
-            //     </div>
-            //     <DialogFooter className="sm:justify-start">
-            //       <DialogClose asChild>
-            //         <Button type="button" variant="secondary">
-            //           Close
-            //         </Button>
-            //       </DialogClose>
-            //     </DialogFooter>
-            //   </DialogContent>
-            // </Dialog>
             <Button
               variant="outline"
               size="icon-lg"
@@ -123,10 +85,16 @@ export const InvitationToolbar = ({
             </Button>
           )}
 
-          <Button type="submit" form="invitation-form" disabled={isSubmitting}>
+          <Button
+            type="submit"
+            form="invitation-form"
+            disabled={isSubmitting}
+            className="min-w-[80px]"
+          >
             {isSubmitting ? (
               <span className="flex items-center gap-2">
                 <Spinner className="h-4 w-4" />
+                Saving...
               </span>
             ) : (
               "Save"

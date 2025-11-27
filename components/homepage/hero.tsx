@@ -10,7 +10,7 @@ export default function Hero() {
   const invitations = [
     {
       id: 1,
-      emoji: "🎃",
+      iconId: "jackolantern",
       bgColor: "#2d1b00",
       textColor: "#ff8c00",
       fontValue: "poppins",
@@ -24,7 +24,7 @@ export default function Hero() {
     },
     {
       id: 2,
-      emoji: "🎄",
+      iconId: "christmastree",
       bgColor: "#1a4d2e",
       textColor: "#ffffff",
       fontValue: "playfair",
@@ -38,7 +38,7 @@ export default function Hero() {
     },
     {
       id: 3,
-      emoji: "🎉",
+      iconId: "partypopper",
       bgColor: "#4a00e0",
       textColor: "#ffffff",
       fontValue: "fredoka",
@@ -142,8 +142,7 @@ export default function Hero() {
                     }}
                   >
                     <InvitationCard
-                      emojiIntensity={1}
-                      emoji={invitation.emoji}
+                      iconId={invitation.iconId}
                       bgColor={invitation.bgColor}
                       textColor={invitation.textColor}
                       fontValue={invitation.fontValue}

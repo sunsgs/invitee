@@ -107,8 +107,8 @@ export const invite = sqliteTable("invite", {
   bgColor: text("bg_color").notNull(),
   fontValue: text("font_value").notNull(),
   textColor: text("text_color").notNull(),
-  emoji: text("emoji"), // optional
-  emojiDensity: integer("emoji_density"), // optional
+  iconId: text("iconId"), // optional
+
   creatorId: text("creator_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),

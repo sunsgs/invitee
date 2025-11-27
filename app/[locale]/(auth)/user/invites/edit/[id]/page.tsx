@@ -21,10 +21,9 @@ export default async function Page({
       name,
       location,
       date,
-      emoji,
+      iconId,
       startTime,
       endTime,
-      emojiDensity,
       rsvpRequired,
       isBabyCountEnabled,
       isMaxGuestsCountEnabled,
@@ -40,8 +39,7 @@ export default async function Page({
           inviteBgColor={bgColor}
           inviteTextColor={textColor}
           inviteFontValue={fontValue}
-          inviteEmoji={emoji || ""}
-          inviteEmojiDensity={emojiDensity || 2}
+          inviteIconId={iconId || ""}
           inviteRSVPRequired={rsvpRequired || false}
           inviteIsBabyCountEnabled={isBabyCountEnabled || false}
           inviteIsMaxGuestsCountEnabled={isMaxGuestsCountEnabled || false}

@@ -7,9 +7,10 @@ import { useFormatter } from "next-intl";
 import { useState } from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import AutoResizingTextarea from "./AutoResizingTextarea";
-import { EmojiBackground } from "./emoji-background";
+import { IconBackground } from "./emoji-svg-background";
 import { FloatingError } from "./floating-error";
 import { TimeToggle } from "./invite-time";
+import { IconDisplay } from "./invite/Emoji-svg-picker";
 import PencilIconInput from "./pencil-input";
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
@@ -25,9 +26,8 @@ interface InvitationCardProps {
   isEditing?: boolean;
   control?: Control<InviteFormData>;
   errors?: FieldErrors<InviteFormData>;
-  emoji?: string;
-  emojiIntensity?: number;
   data: InvitationCardData;
+  iconId?: string;
 }
 
 export function InvitationCard({
@@ -37,8 +37,7 @@ export function InvitationCard({
   isEditing = false,
   control,
   errors,
-  emoji,
-  emojiIntensity = 2,
+  iconId,
   data,
 }: InvitationCardProps) {
   const selectedFont = INVITATION_FONTS.find((f) => f.value === fontValue);
@@ -53,14 +52,8 @@ export function InvitationCard({
       className="relative overflow-hidden border-none px-0 pt-8 pb-4"
       id="invite-card"
     >
-      {emoji && (
-        <EmojiBackground
-          emoji={emoji}
-          bgColor={bgColor}
-          density={emojiIntensity}
-        />
-      )}
-      {!emoji && (
+      {iconId && <IconBackground iconId={iconId} bgColor={bgColor} />}
+      {!iconId && (
         <div
           className="absolute inset-0"
           style={{ backgroundColor: bgColor }}
@@ -72,7 +65,11 @@ export function InvitationCard({
         style={{ color: textColor, fontFamily }}
       >
         {/* Title / Heading */}
-        <div className="font-semibold text-6xl w-full text-center">{emoji}</div>
+        {iconId && (
+          <div className="font-semibold text-6xl w-full text-center">
+            <IconDisplay iconId={iconId} size={80} />
+          </div>
+        )}
 
         {/* Name */}
         <div className="relative w-full font-black leading-none text-5xl md:text-6xl  text-center focus:outline-none transition-all my-8">
