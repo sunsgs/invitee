@@ -7,7 +7,7 @@ import { customAlphabet } from "nanoid";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-const MAX_INVITES = 4;
+const MAX_INVITES = Number(process.env.NEXT_PUBLIC_MAX_INVITES);
 
 async function getUserInviteCount(userId: string): Promise<number> {
   const result = await db

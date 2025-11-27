@@ -392,8 +392,6 @@ export default function IconPicker({
           <div className="grid gap-1 max-h-[280px] overflow-y-auto grid-cols-8">
             {currentGroup?.items.length ? (
               currentGroup.items.map((item, idx) => {
-                const isSelected = selectedIconId === item.id;
-
                 return (
                   <button
                     key={idx}
@@ -403,14 +401,14 @@ export default function IconPicker({
                     className={cn(
                       "aspect-square",
                       "flex items-center justify-center",
-                      "rounded-xl",
+                      "rounded-full",
                       "hover:bg-muted active:bg-muted/80 active:scale-95",
-                      "transition-all duration-150",
-                      "focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
-                      isSelected && "bg-muted ring-2 ring-ring"
+                      "transition-all duration-150"
                     )}
                   >
-                    {renderIconInternal(item, 24)}
+                    {item.unicode
+                      ? renderIconInternal(item, 24)
+                      : renderIconInternal(item, 50)}
                   </button>
                 );
               })

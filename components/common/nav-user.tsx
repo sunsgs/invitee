@@ -35,7 +35,7 @@ export default function NavUser() {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-0" align="end">
+      <DropdownMenuContent className="p-0 w-[220]" align="end">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col py-2 gap-1">
             <p className=" font-semibold leading-none">{user?.name}</p>

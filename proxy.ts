@@ -6,7 +6,7 @@ import { auth } from "./lib/auth";
 
 const intlProxy = createMiddleware(routing);
 
-const PUBLIC_ROUTES = ["/"];
+const PUBLIC_ROUTES = ["/", "/invite/*"];
 const ANONYMOUS_ONLY_ROUTES = ["/user/invites/create"];
 
 function extractLocaleInfo(pathname: string) {
@@ -25,6 +25,7 @@ function isRouteAllowed(
 ): boolean {
   return (
     routeList.includes(pathnameWithoutLocale) ||
+    pathnameWithoutLocale.startsWith("/invite") ||
     pathnameWithoutLocale.startsWith("/_next")
   );
 }

@@ -13,12 +13,12 @@ export function InvitesEmptyState() {
       <p className="text-sm text-muted-foreground text-center mb-6 max-w-sm">
         Create your first event invitation to get started
       </p>
-      <Button asChild size="default" className="gap-2">
-        <Link href="invites/create">
+      <Link href="invites/create">
+        <Button variant={"outline"} className="gap-2">
           <span className="text-lg leading-none">+</span>
           <span>Create Invite</span>
-        </Link>
-      </Button>
+        </Button>
+      </Link>
     </div>
   );
 }

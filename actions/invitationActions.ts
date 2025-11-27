@@ -7,6 +7,7 @@ interface SaveInvitationParams {
   onSuccess?: (result: any) => void;
   onAnonymous?: () => void;
 }
+
 export const saveInvitation = async ({
   data,
   inviteId,
@@ -52,3 +53,14 @@ export const saveInvitation = async ({
 
   return;
 };
+
+export async function deleteAction(inviteId: string) {
+  console.log(inviteId);
+  const endpoint = `/api/invite?id=${inviteId}`;
+  const response = await fetch(endpoint, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+  const result = await response.json();
+  return result;
+}

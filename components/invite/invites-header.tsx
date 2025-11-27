@@ -21,7 +21,6 @@ export function InvitesHeader({
         <h2 className="m-0">Invites</h2>
         <Button
           className="justify-center items-center flex "
-          asChild={canCreate}
           disabled={!canCreate}
           size={"lg"}
         >

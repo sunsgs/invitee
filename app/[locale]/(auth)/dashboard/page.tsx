@@ -25,6 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Spinner } from "@/components/ui/spinner";
 import {
   Table,
   TableBody,
@@ -347,7 +348,7 @@ export default function AdminDashboard() {
                           disabled={isLoading?.startsWith("delete")}
                         >
                           {isLoading === `delete-${user.id}` ? (
-                            <Loader2 className="h-4 w-4 animate-spin" />
+                            <Spinner />
                           ) : (
                             <Trash className="h-4 w-4" />
                           )}

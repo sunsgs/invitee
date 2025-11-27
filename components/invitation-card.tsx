@@ -61,15 +61,11 @@ export function InvitationCard({
       )}
 
       <CardContent
-        className="relative z-20 flex h-full flex-col items-center justify-center px-8 py-16"
+        className="relative z-20 flex h-full flex-col items-center justify-center px-8 py-4 md:py-16"
         style={{ color: textColor, fontFamily }}
       >
         {/* Title / Heading */}
-        {iconId && (
-          <div className="font-semibold text-6xl w-full text-center">
-            <IconDisplay iconId={iconId} size={80} />
-          </div>
-        )}
+        {iconId && <IconDisplay iconId={iconId} size={80} />}
 
         {/* Name */}
         <div className="relative w-full font-black leading-none text-5xl md:text-6xl  text-center focus:outline-none transition-all my-8">

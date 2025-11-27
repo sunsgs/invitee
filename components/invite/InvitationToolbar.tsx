@@ -85,16 +85,10 @@ export const InvitationToolbar = ({
             </Button>
           )}
 
-          <Button
-            type="submit"
-            form="invitation-form"
-            disabled={isSubmitting}
-            className="min-w-[80px]"
-          >
+          <Button type="submit" form="invitation-form" disabled={isSubmitting}>
             {isSubmitting ? (
               <span className="flex items-center gap-2">
                 <Spinner className="h-4 w-4" />
-                Saving...
               </span>
             ) : (
               "Save"
