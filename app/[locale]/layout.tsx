@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   return {
-    metadataBase: new URL(seoConfig.siteUrl),
+    metadataBase: new URL(seoConfig.siteUrl!),
     title: {
       default: seoConfig.defaultTitle,
       template: seoConfig.titleTemplate,

@@ -48,9 +48,9 @@ export function generateSEO(props: SEOProps = {}): Metadata {
   // Generate alternate language links
   const languages: Record<string, string> = {};
   seoConfig.locales.forEach((loc) => {
-    const baseUrl = url.replace(`/${locale}`, "");
+    const baseUrl = url!.replace(`/${locale}`, "");
     languages[loc] = `${seoConfig.siteUrl}/${loc}${baseUrl.replace(
-      seoConfig.siteUrl,
+      seoConfig.siteUrl!,
       ""
     )}`;
   });

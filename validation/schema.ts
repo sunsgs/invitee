@@ -100,11 +100,34 @@ export const inviteSchema = inviteSchemaDB.extend({
   }),
 });
 
-export const RSVPSchema = createInsertSchema(rsvp);
+export const insertRsvpSchema = createInsertSchema(rsvp)
+  .omit({
+    id: true,
+    createdAt: true,
+    updatedAt: true,
+  })
+  .extend({
+    guestName: z
+      .string()
+      .min(3, "Name must be at least 3 characters")
+      .max(100, "Name is too long")
+      .trim(),
+    guestEmail: z
+      .string()
+      .email("Invalid email address")
+      .optional()
+      .or(z.literal("")),
+    guestPhone: z.string().optional().or(z.literal("")),
+    notes: z
+      .string()
+      .max(500, "Notes are too long")
+      .optional()
+      .or(z.literal("")),
+  });
 
 export type ProfileSchema = z.infer<typeof profileSchema>;
 export type InviteFormData = z.infer<typeof inviteSchema>;
-export type RSVPFormData = z.infer<typeof RSVPSchema>;
+export type RSVPFormData = z.infer<typeof insertRsvpSchema>;
 
 export type InvitationCardData = Pick<
   InviteFormData,

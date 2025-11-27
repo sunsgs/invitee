@@ -26,7 +26,20 @@ export default async function Page({
       iconId,
       startTime,
       endTime,
+      isBabyCountEnabled,
+      isMaxGuestsCountEnabled,
+      maxGuestsBabyNumber,
+      maxGuestsNumber,
     } = result;
+
+    console.log(result);
+
+    const settings = {
+      isBabyCountEnabled,
+      isMaxGuestsCountEnabled,
+      maxGuestsBabyNumber,
+      maxGuestsNumber,
+    };
 
     return (
       <main className="max-w-2xl mx-auto px-4 pb-16 mt-16 relative">
@@ -46,7 +59,7 @@ export default async function Page({
             }}
           />
         </section>
-        <RsvpForm inviteId={id} />
+        <RsvpForm inviteId={id} settings={settings} />
 
         <footer>
           <Card className="w-full p-0 fixed max-w-2xl bottom-5 left-0">
