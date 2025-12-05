@@ -1,7 +1,10 @@
+"use client"
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import { Switch } from "@/components/ui/switch";
 import { InviteFormData } from "@/validation/schema";
+import { useTranslations } from "next-intl";
 import { UseFormRegister } from "react-hook-form";
 import { GuestLimitSettings } from "./GuestLimitSettings";
 
@@ -36,12 +39,13 @@ export const InvitationSettings = ({
   onMaxBabyInput,
   onMaxBabyAdjust,
 }: InvitationSettingsProps) => {
+  const t = useTranslations("PRIVATE.INVITE.BUILDER")
   return (
     <Card className="relative overflow-hidden p-0">
       <CardContent className="p-8">
         <FieldGroup>
           <FieldSet>
-            <h3>Customize your invite</h3>
+            <h3>{t("CUSTOMIZE-TITLE")}</h3>
             <div className="space-y-4">
               {/* RSVP Section */}
               <div className="space-y-4">
@@ -52,10 +56,10 @@ export const InvitationSettings = ({
                         htmlFor="rsvpRequired"
                         className="text-base font-medium"
                       >
-                        RSVP Required
+                       {t("RSVP-REQ")}
                       </FieldLabel>
                       <p className="text-sm text-muted-foreground mt-1">
-                        Guests must confirm attendance
+                       {t("RSVP-DESC")}
                       </p>
                     </div>
                     <Switch

@@ -56,7 +56,7 @@ export default function FeatureSection2() {
                           <User className="w-5 h-5 text-white" />
                         </div>
                         <div>
-                          <div className="font-semibold">John Doe</div>
+                          <div className="font-semibold"></div>
                           <div className="text-sm text-purple-200">
                             1 Guest + 2 babies
                           </div>

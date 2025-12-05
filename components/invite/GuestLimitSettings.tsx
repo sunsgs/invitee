@@ -1,6 +1,8 @@
+"use client";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Switch } from "@/components/ui/switch";
 import { InviteFormData } from "@/validation/schema";
+import { useTranslations } from "next-intl";
 import { UseFormRegister } from "react-hook-form";
 import { NumberInputField } from "../number-inputs";
 
@@ -31,6 +33,8 @@ export const GuestLimitSettings = ({
   onMaxBabyInput,
   onMaxBabyAdjust,
 }: GuestLimitSettingsProps) => {
+  const t = useTranslations("PRIVATE.INVITE.BUILDER");
+
   return (
     <div className="space-y-4 pt-4 border-t">
       <Field>
@@ -40,10 +44,10 @@ export const GuestLimitSettings = ({
               htmlFor="isMaxGuestsCountEnabled"
               className="text-base font-medium"
             >
-              Guest Limits
+              {t("GUEST-LIMIT")}
             </FieldLabel>
             <p className="text-sm text-muted-foreground mt-1">
-              Maximum guests each invitee can bring
+              {t("GUEST-MAX")}
             </p>
           </div>
           <Switch
@@ -68,7 +72,7 @@ export const GuestLimitSettings = ({
                 id="maxGuestsNumber"
                 min={1}
                 max={10}
-                label="Adults"
+                label={t("ADULTS")}
                 value={maxGuestsNumber}
                 onChange={onMaxGuestInput}
                 onAdjust={onMaxGuestAdjust}
@@ -85,10 +89,10 @@ export const GuestLimitSettings = ({
                     htmlFor="isMaxGuestsCountEnabled"
                     className="text-base font-medium"
                   >
-                    Track babies separately
+                    {t("BABY-SEP")}
                   </FieldLabel>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Maximum guests each invitee can bring
+                    {t("BABY-MAX")}
                   </p>
                 </div>
                 <Switch
@@ -111,7 +115,7 @@ export const GuestLimitSettings = ({
                   id="maxGuestsBabyNumber"
                   min={1}
                   max={10}
-                  label="Babies (under 2 years)"
+                  label={t("BABY-LABEL")}
                   value={maxBabies}
                   onChange={onMaxBabyInput}
                   onAdjust={onMaxBabyAdjust}

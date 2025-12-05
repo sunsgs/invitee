@@ -13,6 +13,8 @@ import { insertRsvpSchema, RSVPFormData } from "@/validation/schema";
 import { NumberInputField } from "./number-inputs";
 import { Field } from "./ui/field";
 import { Input } from "./ui/input";
+import { Spinner } from "./ui/spinner";
+import { Textarea } from "./ui/textarea";
 
 interface RsvpFormProps {
   inviteId: string;
@@ -25,28 +27,25 @@ const RSVP_OPTIONS = [
     value: "not_attending",
     label: "Can't go",
     icon: XCircle,
-    iconColor: "text-gray-500",
-    selectedBg: "bg-gray-900",
+    selectedBg: "bg-muted-foreground",
     selectedText: "text-white",
-    selectedBorder: "border-gray-900",
+    selectedBorder: "border-muted-foreground",
   },
   {
     value: "maybe",
     label: "Maybe",
     icon: HelpCircle,
-    iconColor: "text-gray-500",
-    selectedBg: "bg-gray-900",
+    selectedBg: "bg-muted-foreground",
     selectedText: "text-white",
-    selectedBorder: "border-gray-900",
+    selectedBorder: "border-muted-foreground",
   },
   {
     value: "attending",
     label: "Going",
     icon: CheckCircle2,
-    iconColor: "text-gray-500",
-    selectedBg: "bg-black",
-    selectedText: "text-white",
-    selectedBorder: "border-black",
+    selectedBg: "bg-muted-foreground",
+    selectedText: "text-background",
+    selectedBorder: "border-foreground",
   },
 ] as const;
 
@@ -56,7 +55,6 @@ export default function RsvpForm({
   onSubmitAction,
 }: RsvpFormProps) {
   const [isPending, startTransition] = useTransition();
-  console.log(settings);
 
   const {
     control,
@@ -88,20 +86,16 @@ export default function RsvpForm({
     selectedStatus === "attending" || selectedStatus === "maybe";
 
   const onSubmit = (data: RSVPFormData) => {
-    // startTransition(async () => {
-    //   if (onSubmitAction) await onSubmitAction(data);
-    // });
-    console.log(data);
+    startTransition(async () => {
+      if (onSubmitAction) await onSubmitAction(data);
+      console.log(data);
+    });
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-6">
+    <div className="w-full max-w-2xl mx-auto space-y-8 mt-8">
       {/* Status Selection */}
-      <div className="space-y-3">
-        <h3 className="text-base font-semibold text-foreground">
-          Will you attend?
-        </h3>
-
+      <div className="space-y-2">
         <Controller
           control={control}
           name="status"
@@ -126,10 +120,10 @@ export default function RsvpForm({
                       <Label
                         htmlFor={option.value}
                         className={cn(
-                          "flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl font-medium text-sm cursor-pointer transition-all duration-200 ease-out border-2",
+                          "flex items-center justify-center gap-2 px-4 py-4 rounded-xl font-medium text-sm cursor-pointer transition-all duration-200 ease-out border",
                           isSelected
-                            ? `${option.selectedBg} ${option.selectedText} shadow-md scale-[1.02]`
-                            : "bg-white text-gray-700 border-gray-200 hover:border-gray-900 hover:shadow-sm active:scale-[0.98]"
+                            ? `${option.selectedBg} ${option.selectedText} ${option.selectedBorder} scale-[1.02]`
+                            : "bg-card border-border text-foreground hover:border-muted-foreground/40"
                         )}
                       >
                         {isSelected && <Icon className="h-4 w-4" />}
@@ -140,7 +134,7 @@ export default function RsvpForm({
                 })}
               </RadioGroup>
               {fieldState.error && (
-                <p className="text-sm text-red-500 mt-2">
+                <p className="text-sm text-destructive mt-3">
                   {fieldState.error.message}
                 </p>
               )}
@@ -157,10 +151,10 @@ export default function RsvpForm({
             name="guestName"
             control={control}
             render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
+              <Field data-invalid={fieldState.invalid} className="gap-2">
                 <Label
                   htmlFor="guest-name"
-                  className="text-sm font-medium text-foreground mb-2 block"
+                  className="text-sm font-medium"
                 >
                   Your name
                 </Label>
@@ -170,15 +164,16 @@ export default function RsvpForm({
                   placeholder="John Smith"
                   autoComplete="name"
                   className={cn(
-                    "h-12 rounded-xl border-2 transition-colors",
+                    "h-12 bg-card rounded-xl px-4 border transition-colors",
+                    "focus:outline-none focus-visible:border-foreground focus-visible:ring-0",
                     fieldState.error
-                      ? "border-red-500 focus-visible:ring-red-500"
-                      : "border-input"
+                      ? "border-destructive focus-visible:border-destructive"
+                      : "border-border hover:border-muted-foreground/40"
                   )}
                   aria-invalid={fieldState.invalid}
                 />
                 {fieldState.error && (
-                  <p className="text-sm text-red-500 mt-1.5">
+                  <p className="text-sm text-destructive mt-2">
                     {fieldState.error.message}
                   </p>
                 )}
@@ -186,130 +181,61 @@ export default function RsvpForm({
             )}
           />
 
-          {/* Contact Info - Optional
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Controller
-              name="guestEmail"
-              control={control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <Label
-                    htmlFor="guest-email"
-                    className="text-sm font-medium text-foreground mb-2 block"
-                  >
-                    Email
-                  </Label>
-                  <Input
-                    {...field}
-                    id="guest-email"
-                    type="email"
-                    placeholder="john@example.com"
-                    autoComplete="email"
-                    className={cn(
-                      "h-12 rounded-xl border-2 transition-colors",
-                      fieldState.error
-                        ? "border-red-500 focus-visible:ring-red-500"
-                        : "border-input"
-                    )}
-                    aria-invalid={fieldState.invalid}
-                  />
-                  {fieldState.error && (
-                    <p className="text-sm text-red-500 mt-1.5">
-                      {fieldState.error.message}
-                    </p>
-                  )}
-                </Field>
-              )}
-            />
-
-            <Controller
-              name="guestPhone"
-              control={control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <Label
-                    htmlFor="guest-phone"
-                    className="text-sm font-medium text-foreground mb-2 block"
-                  >
-                    Phone
-                  </Label>
-                  <Input
-                    {...field}
-                    id="guest-phone"
-                    type="tel"
-                    placeholder="+1 (555) 000-0000"
-                    autoComplete="tel"
-                    className={cn(
-                      "h-12 rounded-xl border-2 transition-colors",
-                      fieldState.error
-                        ? "border-red-500 focus-visible:ring-red-500"
-                        : "border-input"
-                    )}
-                    aria-invalid={fieldState.invalid}
-                  />
-                  {fieldState.error && (
-                    <p className="text-sm text-red-500 mt-1.5">
-                      {fieldState.error.message}
-                    </p>
-                  )}
-                </Field>
-              )}
-            />
-          </div> */}
-
           {/* Guest Count - Only for attending/maybe */}
           {showGuestCount &&
             (settings.isBabyCountEnabled ||
               settings.isMaxGuestsCountEnabled) && (
-              <div className="space-y-4 pt-2">
-                <h4 className="text-sm font-semibold text-foreground">
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium text-foreground">
                   How many guests?
                 </h4>
 
-                <div className="space-y-3 border-2 border-gray-100 rounded-xl p-4 bg-gray-50/50">
+                <div className="space-y-0 border border-border rounded-xl overflow-hidden divide-y divide-border ">
                   {settings.isMaxGuestsCountEnabled && (
-                    <NumberInputField
-                      id="adultsCount"
-                      label="Guests"
-                      value={adultsCount || 0}
-                      onAdjust={(adj) => {
-                        const current = adultsCount || 0;
-                        setValue("adultsCount", current + adj, {
-                          shouldDirty: true,
-                        });
-                      }}
-                      registerProps={register("adultsCount", {
-                        valueAsNumber: true,
-                      })}
-                      min={1}
-                      max={settings.maxAdults}
-                      className="border-b border-gray-200 last:border-b-0 pb-4"
-                    />
+                    <div className="p-4">
+                      <NumberInputField
+                        id="adultsCount"
+                        label="Guests"
+                        value={adultsCount || 1}
+                        onAdjust={(adj) => {
+                          const current = adultsCount || 1;
+                          setValue("adultsCount", current + adj, {
+                            shouldDirty: true,
+                          });
+                        }}
+                        registerProps={register("adultsCount", {
+                          valueAsNumber: true,
+                        })}
+                        min={1}
+                        max={settings.maxAdults}
+                      />
+                    </div>
                   )}
                   {settings.isBabyCountEnabled && (
-                    <NumberInputField
-                      id="babiesCount"
-                      label="Babies"
-                      description="Under 2 years"
-                      value={babiesCount || 0}
-                      onAdjust={(adj) => {
-                        const current = babiesCount || 0;
-                        setValue("babiesCount", current + adj, {
-                          shouldDirty: true,
-                        });
-                      }}
-                      registerProps={register("babiesCount", {
-                        valueAsNumber: true,
-                      })}
-                      min={0}
-                      max={settings.maxBabies}
-                      className="pt-4"
-                    />
+                    <div className="p-4">
+                      <NumberInputField
+                        id="babiesCount"
+                        label="Babies"
+                        description="Under 2 years"
+                        value={babiesCount || 0}
+                        onAdjust={(adj) => {
+                          const current = babiesCount || 0;
+                          setValue("babiesCount", current + adj, {
+                            shouldDirty: true,
+                          });
+                        }}
+                        registerProps={register("babiesCount", {
+                          valueAsNumber: true,
+                        })}
+                        min={0}
+                        max={settings.maxBabies}
+                      />
+                    </div>
                   )}
                 </div>
 
                 {(errors.adultsCount || errors.babiesCount) && (
-                  <p className="text-sm text-red-500 mt-1.5">
+                  <p className="text-sm text-destructive mt-2">
                     {errors.adultsCount?.message || errors.babiesCount?.message}
                   </p>
                 )}
@@ -321,29 +247,29 @@ export default function RsvpForm({
             name="notes"
             control={control}
             render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
+              <Field data-invalid={fieldState.invalid} className="gap-2">
                 <Label
                   htmlFor="notes"
-                  className="text-sm font-medium text-foreground mb-2 block"
+                  className="text-sm font-medium"
                 >
                   Additional notes
                 </Label>
-                <textarea
+                <Textarea
                   {...field}
                   id="notes"
                   placeholder="Dietary restrictions, accessibility needs, etc."
-                  rows={3}
+                  rows={4}
                   className={cn(
-                    "w-full rounded-xl border-2 px-3 py-2 text-sm transition-colors resize-none",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                    "bg-card rounded-xl px-4 py-3 border resize-none transition-colors",
+                    "focus:outline-none focus-visible:border-foreground focus-visible:ring-0",
                     fieldState.error
-                      ? "border-red-500 focus-visible:ring-red-500"
-                      : "border-input"
+                      ? "border-destructive focus-visible:border-destructive"
+                      : "border-border hover:border-muted-foreground/40"
                   )}
                   aria-invalid={fieldState.invalid}
                 />
                 {fieldState.error && (
-                  <p className="text-sm text-red-500 mt-1.5">
+                  <p className="text-sm text-destructive mt-2">
                     {fieldState.error.message}
                   </p>
                 )}
@@ -355,18 +281,10 @@ export default function RsvpForm({
           <Button
             onClick={handleSubmit(onSubmit)}
             disabled={isPending || !isValid}
-            className={cn(
-              "w-full h-12 rounded-xl text-base font-semibold transition-all",
-              "bg-black hover:bg-gray-900 text-white",
-              "disabled:opacity-50 disabled:cursor-not-allowed",
-              isPending && "cursor-wait"
-            )}
+           className="py-8 w-full font-medium bg-muted-foreground hover:bg-foreground/80"
           >
             {isPending ? (
-              <span className="flex items-center justify-center gap-2">
-                <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                Saving...
-              </span>
+              <Spinner/>
             ) : (
               "Confirm RSVP"
             )}

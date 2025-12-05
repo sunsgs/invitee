@@ -1,3 +1,5 @@
+"use client"
+
 import { CheckCircle, PaintBucket, Palette, Type, User } from "lucide-react";
 import { useTranslations } from "next-intl";
 import CTAhero from "./cta";
@@ -84,13 +86,17 @@ export default function FeatureSection() {
                         <User className="w-5 h-5 " />
                       </div>
                       <div>
-                        <div className="font-semibold">John Doe</div>
-                        <div className="text-sm">1 Guest + 2 babies</div>
+                        <div className="font-semibold">
+                          {t("FEATURE3.EXAMPLE1")}
+                        </div>
+                        <div className="text-sm">
+                          1 {t("FEATURE3.GUEST")} + 2 {t("FEATURE3.BABY")}
+                        </div>
                       </div>
                     </div>
                     <div className="flex flex-col justify-center items-center">
                       <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span className="text-sm">coming</span>
+                      <span className="text-sm">{t("FEATURE3.COMING")}</span>
                     </div>
                   </div>
                 </div>
@@ -102,13 +108,17 @@ export default function FeatureSection() {
                         <User className="w-5 h-5 " />
                       </div>
                       <div>
-                        <div className="font-semibold">John Doe</div>
-                        <div className="text-sm">1 Guest + 2 babies</div>
+                        <div className="font-semibold">
+                          {t("FEATURE3.EXAMPLE2")}
+                        </div>
+                        <div className="text-sm">
+                          1 {t("FEATURE3.GUEST")} + 2 {t("FEATURE3.BABY")}
+                        </div>
                       </div>
                     </div>
                     <div className="flex flex-col justify-center items-center">
                       <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span className="text-sm">coming</span>
+                      <span className="text-sm">{t("FEATURE3.COMING")}</span>
                     </div>
                   </div>
                 </div>
@@ -123,9 +133,9 @@ export default function FeatureSection() {
 
         <div className="mt-24 md:mt-48 text-center">
           <p className="text-lg">
-            E poi? Condividi il tuo invito nel mondo, ovunque,
+            {t("FOOTER.COPY1")}
             <br />
-            come un meme virale.
+            {t("FOOTER.COPY2")}
           </p>
         </div>
         <div className="flex w-full items-center justify-center">

@@ -55,7 +55,6 @@ export const saveInvitation = async ({
 };
 
 export async function deleteAction(inviteId: string) {
-  console.log(inviteId);
   const endpoint = `/api/invite?id=${inviteId}`;
   const response = await fetch(endpoint, {
     method: "DELETE",

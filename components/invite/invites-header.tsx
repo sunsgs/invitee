@@ -1,5 +1,6 @@
-// components/invites-header.tsx
+"use client"
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 interface InvitesHeaderProps {
@@ -14,11 +15,12 @@ export function InvitesHeader({
   canCreate,
 }: InvitesHeaderProps) {
   const remainingSlots = maxInvites - count;
+  const t = useTranslations("PRIVATE.HEADER");
 
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between">
-        <h2 className="m-0">Invites</h2>
+        <h2 className="m-0">{t("INVITES")}</h2>
         <Button
           className="justify-center items-center flex "
           disabled={!canCreate}
@@ -26,17 +28,17 @@ export function InvitesHeader({
         >
           <Link href="invites/create" className="flex items-center gap-2">
             <span className="text-lg leading-none">+</span>
-            <span className="hidden sm:inline">Create invite</span>
+            <span className="hidden sm:inline">{t("CREATE")}</span>
           </Link>
         </Button>
       </div>
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <span>
-          {count} of {maxInvites} invites
+         {t('USED', {count, maxInvites})}
         </span>
         {remainingSlots > 0 && (
           <div>
-            <span>-</span> <span>{remainingSlots} remaining</span>
+            <span>-</span> <span>{remainingSlots} {t('REMAINING', {remainingSlots})}</span>
           </div>
         )}
       </div>

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { isMobile } from "react-device-detect";
 
 import { InvitationCard } from "@/components/invitation-card";
-import { Field, FieldDescription } from "@/components/ui/field";
+import { Field } from "@/components/ui/field";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { authClient } from "@/lib/auth-client";
@@ -125,7 +125,6 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
   }, [pendingData, reset]);
 
   const onSubmit = async (data: InviteFormData) => {
-    console.log(data);
     try {
       await saveInvitation({
         data,
@@ -133,7 +132,6 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
         isAnonymous: session?.user.isAnonymous || undefined,
         onSuccess: (result) => {
           toast.success(t(result.status));
-          console.log(result.status);
           if (result.status === "SUCCESS.INVITE.CREATED") {
             router.push(`/user/invites/edit/${result.id}`);
           }
@@ -154,8 +152,8 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
     if (navigator.share && isMobile) {
       try {
         await navigator.share({
-          title: `${props.data?.name} - invite created with SMOOU`,
-          text: "created with SMOOU",
+          title: `${props.data?.name} - ${t("PRIVATE.INVITE.SHARE")}}`,
+          text: t("PRIVATE.INVITE.SHARE"),
           url: `${process.env.NEXT_PUBLIC_APP_URL}/invite/${props.inviteId}`,
         });
       } catch (err) {
@@ -215,9 +213,9 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
       <Dialog open={isShareDialogOpen} onOpenChange={setIsShareDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Share link</DialogTitle>
+            <DialogTitle>{t("PRIVATE.INVITE.SHARE-DIALOG-TITLE")}</DialogTitle>
             <DialogDescription>
-              Anyone who has this link will be able to view this.
+              {t("PRIVATE.INVITE.SHARE-DIALOG-COPY")}
             </DialogDescription>
           </DialogHeader>
           <div className="flex items-center gap-2">
@@ -234,8 +232,12 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
           </div>
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>
-              <Button type="button" variant="secondary">
-                Close
+              <Button
+                className="button-rounded"
+                type="button"
+                variant="secondary"
+              >
+                {t("PRIVATE.INVITE.SHARE-DIALOG-CLOSE")}
               </Button>
             </DialogClose>
           </DialogFooter>
@@ -245,7 +247,11 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
       <div className="w-full mb-10">
         <div>
           <Link href="/user/invites">
-            <Button variant="outline" size={"icon-lg"}>
+            <Button
+              className="button-rounded"
+              variant="outline"
+              size={"icon-lg"}
+            >
               <ArrowLeft />
             </Button>
           </Link>
@@ -274,16 +280,13 @@ export default function InvitationBuilder(props: InvitationBuilderProps) {
           />
 
           <Field>
-            <p>Notes/Description</p>
+            <p>{t("PRIVATE.INVITE.BUILDER.NOTES")}</p>
             <Textarea
               className="bg-card rounded-2xl p-4 focus:outline-none focus-visible:border-foreground focus-visible:ring-[0]"
               id="description"
               {...register("description")}
-              placeholder="description or notes"
+              placeholder={t("PRIVATE.INVITE.BUILDER.NOTES")}
             />
-            <FieldDescription>
-              Any additional details about your invitation
-            </FieldDescription>
             {errors.description && (
               <p className="text-red-500 text-sm mt-1">
                 {errors.description.message}

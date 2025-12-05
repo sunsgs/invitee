@@ -1,57 +1,124 @@
 {
   "HOMEPAGE": {
     "HERO": {
-      "TITLE": "Create invites too good to ignore.",
-      "SUBTITLE": "Pick your style, send the invite, and see who’s in, who’s out (and who’s having second thoughts).",
-      "CTA": "Invite with Style"
+      "TITLE": "Invitations too beautiful to be ignored.",
+      "SUBTITLE": "Choose a style, send the invitation, find out who’s coming, who’s not (and who regrets it).",
+      "CTA": "Invite with style"
     },
     "FEATURES": {
-      "TITLE": "Features That Rock",
-      "SUBTITLE": "Why settle for a plain invite when you can create a masterpiece?",
+      "TITLE": "Features that rock",
+      "SUBTITLE": "Why settle for a normal invitation when you can create a masterpiece?",
       "FEATURE1": {
-        "TITLE": "Make It Yours",
-        "COPY": "Customize your invite however you like: pick colors, fonts, and the perfect style just for you."
+        "TITLE": "Customise",
+        "COPY": "Customise your invitation as you like: choose colours, fonts and the perfect look for you."
       },
       "FEATURE2": {
-        "TITLE": "Pick Your Emoji",
-        "COPY": "Choose the emoji that stands out the most—because sometimes one emoji says more than a thousand words."
+        "TITLE": "Choose the emoji",
+        "COPY": "Pick the emoji that rocks the most, because an emoji says more than a thousand words."
       },
       "FEATURE3": {
-        "TITLE": "Handle RSVPs Like a Pro",
-        "COPY": "Who’s responding? How many friends are they bringing? And what about the little VIPs? Nothing’s left to chance here: you decide who gets the invite, who can bring guests, and if the kiddos are welcome."
+        "TITLE": "Manage responses like a real boss",
+        "COPY": "Who’s replying? How many friends are they bringing? And how many well-bred children? Nothing is left to chance here: you decide who deserves to come to the party, who can bring company, and if the little ones are welcome.",
+        "EXAMPLE1": "Lorenzo",
+        "EXAMPLE2": "Emma",
+        "GUEST": "Guest",
+        "BABY": "Children",
+        "COMING": "Confirmed"
+      },
+      "FOOTER": {
+        "COPY1": "And then? Share your invitation with the world, everywhere,",
+        "COPY2": "like a viral meme."
       }
     },
     "CARDS": {
       "1": {
         "NAME": "Halloween Hunting",
-        "LOCATION": "Haunted Mansion"
+        "LOCATION": "Haunted House"
       },
       "2": {
         "NAME": "XMAS Party",
-        "LOCATION": "The Winter Lodge"
+        "LOCATION": "North Pole"
       },
       "3": {
-        "NAME": "New Years Eve",
-        "LOCATION": "Skyline Ballroom"
+        "NAME": "New Year’s Eve",
+        "LOCATION": "My house"
       }
     }
   },
   "COMMON": {
     "LOGIN": "Log in",
-    "GOOGLE": "Log in with Google",
     "LOGINTOCONTINUE": "Log in to continue",
+    "GOOGLE": "Log in with Google",
     "FACEBOOK": "Log in with Facebook"
   },
   "PROFILE": {
     "NAME": "Full name"
   },
   "ERRORS": {
-    "INVITE_LIMIT_REACHED": "You reached invites limit creation"
+    "INVITE_LIMIT_REACHED": "You have reached the maximum number of invitations you can create"
   },
   "SUCCESS": {
     "INVITE": {
-      "CREATED": "Invite created",
-      "UPDATED": "Invite updated"
+      "CREATED": "Invitation created",
+      "UPDATED": "Invitation updated"
+    }
+  },
+  "PRIVATE": {
+    "NAVBAR": {
+      "MYINVITES": "My invitations",
+      "PROFILE": "Profile",
+      "LOGOUT": "Log out"
+    },
+    "HEADER": {
+      "INVITES": "Invitations",
+      "CREATE": "Create invitation",
+      "USED": "{count, plural, =0 {0 of {maxInvites} invitations} =1 {1 of {maxInvites} invitations} other {# of {maxInvites} invitations}}",
+      "REMAINING": "{remainingSlots, plural, =0 {left} =1 {left} other {left}}"
+    },
+    "EMPTY": {
+      "TITLE": "No invitations created",
+      "COPY": "Create your first invitation",
+      "CREATE": "Create invitation"
+    },
+    "PROFILE": {
+      "TITLE": "Settings",
+      "PROFILE": "Profile",
+      "COPY-PROFILE": "Update your information",
+      "FULL-NAME": "Full name",
+      "SAVE": "Save",
+      "LANG-REGION": "Language",
+      "LANG-COPY": "Choose your preferred language",
+      "DANGER": "Danger zone",
+      "DANGER-COPY": "Irreversible actions for your account",
+      "DELETE": "Delete account",
+      "DELETE-COPY": "Permanently delete your account and all data. This action cannot be undone.",
+      "DELETE-CONF": "Are you sure you want to delete your account? All your data and invitations will be permanently deleted. This action cannot be undone."
+    },
+    "INVITE": {
+      "STATS": "Stats",
+      "EDIT": "Edit",
+      "SHARE": "created with SMOOU",
+      "SHARE-DIALOG-TITLE": "Link to share",
+      "SHARE-DIALOG-COPY": "Anyone with this link will see your invitation",
+      "SHARE-DIALOG-CLOSE": "Close",
+      "BUILDER": {
+        "NOTES": "Notes/Description",
+        "CUSTOMIZE-TITLE": "Customise your invitation",
+        "RSVP-REQ": "Response required",
+        "RSVP-DESC": "Guests must confirm attendance",
+        "GUEST-LIMIT": "Guest limit",
+        "GUEST-MAX": "Maximum number of guests each invitee can bring",
+        "ADULTS": "Adults",
+        "BABY-SEP": "Count children separately",
+        "BABY-MAX": "Maximum number of children each invitee can bring",
+        "BABY-LABEL": "Children",
+        "NAME": "Name",
+        "SELECT-DATE": "Select a date",
+        "START-TIME": "Start time",
+        "END-TIME": "End time",
+        "LOCATION": "Location",
+        "SAVE": "Save"
+      }
     }
   }
 }

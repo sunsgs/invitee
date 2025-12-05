@@ -222,7 +222,7 @@
     @apply !font-bold text-xl;
   }
 
-  button {
+  .button-rounded {
     @apply !rounded-full;
   }
 

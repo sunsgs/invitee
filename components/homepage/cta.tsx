@@ -48,7 +48,7 @@ export default function CTAhero() {
     <Button
       onClick={handleGetStarted}
       disabled={isProcessing}
-      className="shadow-xl mt-4 bg-primary/90 hover:bg-primary/80 px-12 py-6 border-b-4 border-primary font-medium text-lg disabled:opacity-70 disabled:cursor-not-allowed transition-all"
+      className="button-rounded shadow-xl mt-4 bg-primary/90 hover:bg-primary/80 px-12 py-6 border-b-4 border-primary font-medium text-lg disabled:opacity-70 disabled:cursor-not-allowed transition-all"
     >
       {isProcessing ? (
         <motion.div

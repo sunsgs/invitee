@@ -12,10 +12,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
-import { Loader2, TriangleAlert } from "lucide-react";
+import { TriangleAlert } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
+import { Spinner } from "../ui/spinner";
 
 interface DeleteAccountDialogProps {
   session: any; // Replace with your session type
@@ -24,6 +26,8 @@ interface DeleteAccountDialogProps {
 export default function DeleteAccountDialog({
   session,
 }: DeleteAccountDialogProps) {
+  const t = useTranslations("PRIVATE.PROFILE");
+
   const [open, setOpen] = useState(false);
   const [confirmText, setConfirmText] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -81,14 +85,14 @@ export default function DeleteAccountDialog({
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button variant="destructive" size="sm">
-          Delete Account
+        <Button className="button-rounded" variant="destructive" size="sm">
+          {t("DELETE")}
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <div className="flex items-center gap-3">
-            <DialogTitle className="text-xl">Delete Account</DialogTitle>
+            <DialogTitle className="text-xl"> {t("DELETE")}</DialogTitle>
           </div>
         </DialogHeader>
         <div className="sm:flex sm:items-start">
@@ -98,8 +102,7 @@ export default function DeleteAccountDialog({
           <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
             <div className="mt-2">
               <p className="text-sm">
-                Are you sure you want to delete your account? All of your data
-                will be permanently removed. This action cannot be undone.
+                {t("DELETE-CONF")}
               </p>
             </div>
           </div>
@@ -126,6 +129,7 @@ export default function DeleteAccountDialog({
 
         <DialogFooter className="gap-2">
           <Button
+            className="button-rounded"
             type="button"
             variant="outline"
             onClick={() => handleOpenChange(false)}
@@ -134,6 +138,7 @@ export default function DeleteAccountDialog({
             Cancel
           </Button>
           <Button
+            className="button-rounded"
             type="button"
             variant="destructive"
             onClick={handleDelete}
@@ -141,8 +146,7 @@ export default function DeleteAccountDialog({
           >
             {isPending ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Deleting...
+                <Spinner />
               </>
             ) : (
               "Delete My Account"

@@ -1,6 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import {
   NavigationMenu,
@@ -11,6 +12,8 @@ import {
 import NavUser from "./nav-user";
 
 export function Header() {
+  const t = useTranslations("PRIVATE.NAVBAR");
+
   const { data: session } = authClient.useSession();
   const isAnonymous = session?.user.isAnonymous;
   return (
@@ -28,7 +31,7 @@ export function Header() {
                     className="underline font-semibold"
                     asChild
                   >
-                    <Link href="/user/invites">My invites</Link>
+                    <Link href="/user/invites">{t("MYINVITES")}</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>

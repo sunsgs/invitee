@@ -1,6 +1,6 @@
+import { PromoFooter } from "@/components/homepage/footer";
 import { InvitationCard } from "@/components/invitation-card";
 import RsvpForm from "@/components/RSVP-form";
-import { Card, CardContent } from "@/components/ui/card";
 import { db } from "@/db";
 import { notFound } from "next/navigation";
 
@@ -32,7 +32,6 @@ export default async function Page({
       maxGuestsNumber,
     } = result;
 
-    console.log(result);
 
     const settings = {
       isBabyCountEnabled,
@@ -61,16 +60,8 @@ export default async function Page({
         </section>
         <RsvpForm inviteId={id} settings={settings} />
 
-        <footer>
-          <Card className="w-full p-0 fixed max-w-2xl bottom-5 left-0">
-            <CardContent className="m-0! text-center flex justify-center items-center gap-2 mt-8 text-sm">
-              <span className="flex">create your invite with</span>
-              <span className="flex font-bagel text-2xl text-primary">
-                SMOOU
-              </span>
-            </CardContent>
-          </Card>
-        </footer>
+        {/* <Footer/> */}
+        <PromoFooter/>
       </main>
     );
   } else {

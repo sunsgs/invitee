@@ -3,7 +3,7 @@
 import { cn, isEventExpired } from "@/lib/utils";
 import { InviteFormData } from "@/validation/schema";
 import { BarChart3, Clock, Edit2, Trash2 } from "lucide-react";
-import { useFormatter } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { Badge } from "./ui/badge";
@@ -25,6 +25,7 @@ interface InviteCardProps {
 }
 
 export function InviteCard({ invite, onDelete }: InviteCardProps) {
+  const t = useTranslations("PRIVATE.INVITE");
   const format = useFormatter();
   const [isPending, startTransition] = useTransition();
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -84,8 +85,8 @@ export function InviteCard({ invite, onDelete }: InviteCardProps) {
 
             {/* Middle: Event Details */}
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <h3 className="font-semibold text-base truncate">
+              <div className="flex items-center">
+                <h3 className="font-semibold text-base truncate mb-0">
                   {invite.name}
                 </h3>
                 {isExpired && (
@@ -93,7 +94,7 @@ export function InviteCard({ invite, onDelete }: InviteCardProps) {
                     variant="secondary"
                     className="text-[10px] px-2 py-0.5 h-5"
                   >
-                    Past
+                    {t("PAST")}
                   </Badge>
                 )}
               </div>
@@ -110,13 +111,13 @@ export function InviteCard({ invite, onDelete }: InviteCardProps) {
               <Button asChild variant="ghost">
                 <Link href={`invites/${invite.id}/stats`}>
                   <BarChart3 className="h-4 w-4" />
-                  <span className="text-sm">Stats</span>
+                  <span className="text-sm"> {t("STATS")}</span>
                 </Link>
               </Button>
               <Button asChild variant="outline">
                 <Link href={`invites/edit/${invite.id}`}>
                   <Edit2 className="h-4 w-4" />
-                  <span className="text-sm">Edit</span>
+                  <span className="text-sm"> {t("EDIT")}</span>
                 </Link>
               </Button>
               <Button

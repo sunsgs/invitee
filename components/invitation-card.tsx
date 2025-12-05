@@ -3,7 +3,7 @@
 import { INVITATION_FONTS } from "@/lib/fonts-config";
 import { InvitationCardData, InviteFormData } from "@/validation/schema";
 import { ChevronDownIcon } from "lucide-react";
-import { useFormatter } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import AutoResizingTextarea from "./AutoResizingTextarea";
@@ -46,6 +46,7 @@ export function InvitationCard({
   const startTime = control ? control._getWatch("startTime") : undefined;
   const isStartTimeSet =
     typeof startTime === "string" && /^\d{2}:\d{2}$/.test(startTime);
+  const t = useTranslations("PRIVATE.INVITE.BUILDER");
 
   return (
     <Card
@@ -83,7 +84,7 @@ export function InvitationCard({
                       maxLines={2}
                       aria-invalid={errors?.name ? "true" : "false"}
                       className="w-full focus:outline-none transition-all resize-none overflow-hidden text-center leading-normal"
-                      placeholder="Name"
+                      placeholder={t("NAME")}
                       autoComplete="off"
                     />
                     <FloatingError error={errors?.name} bgColor={bgColor} />
@@ -147,7 +148,7 @@ export function InvitationCard({
                                   month: "long",
                                   year: "numeric",
                                 })
-                              : "select date"}
+                              : t("SELECT-DATE")}
                             <ChevronDownIcon className="ml-2 h-4 w-4" />
                           </Button>
                         </PopoverTrigger>
@@ -183,7 +184,7 @@ export function InvitationCard({
               />
               {control && (
                 <TimeToggle
-                  label="Start Time"
+                  label={t("START-TIME")}
                   name="startTime"
                   control={control}
                   errors={errors}
@@ -194,7 +195,7 @@ export function InvitationCard({
               )}
               {isStartTimeSet && control && (
                 <TimeToggle
-                  label="End Time"
+                  label={t("END-TIME")}
                   name="endTime"
                   control={control}
                   errors={errors}
@@ -230,7 +231,7 @@ export function InvitationCard({
                   maxLines={2}
                   aria-invalid={errors?.location ? "true" : "false"}
                   className="w-full focus:outline-none transition-all resize-none overflow-hidden text-center"
-                  placeholder="location"
+                  placeholder={t("LOCATION")}
                   autoComplete="off"
                 />
                 <PencilIconInput />

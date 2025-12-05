@@ -3,6 +3,7 @@
 import { authClient, signOut } from "@/lib/auth-client";
 import { getInitials } from "@/lib/utils";
 import { LogOut, User } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
@@ -16,6 +17,8 @@ import {
 } from "../ui/dropdown-menu";
 
 export default function NavUser() {
+  const t = useTranslations("PRIVATE.NAVBAR");
+
   const router = useRouter();
   const handleSignOut = async () => {
     await signOut();
@@ -30,7 +33,7 @@ export default function NavUser() {
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
           {user?.image && <AvatarImage src={user?.image} alt={user?.name} />}
-          <AvatarFallback className="bg-accent rounded-lg text-xs">
+          <AvatarFallback className="bg-accent rounded-lg text-xs font-semibold">
             {getInitials(user?.name || "")}
           </AvatarFallback>
         </Avatar>
@@ -51,7 +54,7 @@ export default function NavUser() {
             onClick={() => router.push("/user/profile")}
           >
             <User className="mr-2 h-4 w-4" />
-            <span>Profile</span>
+            <span>{t("PROFILE")}</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator className="m-0" />
@@ -60,7 +63,7 @@ export default function NavUser() {
           onClick={handleSignOut}
         >
           <LogOut className="text-primary mr-2 h-4 w-4" />
-          <span>Log out </span>
+            <span>{t("LOGOUT")}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -1,9 +1,8 @@
+// i18n/routing.ts
 import { defineRouting } from "next-intl/routing";
+import { locales } from "./locales";
 
 export const routing = defineRouting({
-  // A list of all locales that are supported
-  locales: ["it", "en", "pl"],
-
-  // Used when no locale matches
+  locales: locales,
   defaultLocale: "it",
 });

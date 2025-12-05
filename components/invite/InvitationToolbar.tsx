@@ -1,7 +1,10 @@
+"use client";
+
 import { ColorPickerPopover } from "@/components/color-picker-popover";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { Baseline, PaintBucket, Share } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { FontSelector } from "../font-selector";
 import IconPicker from "./Emoji-svg-picker";
 
@@ -36,6 +39,8 @@ export const InvitationToolbar = ({
   onIconSelect,
   onShare,
 }: InvitationToolbarProps) => {
+  const t = useTranslations("PRIVATE.INVITE.BUILDER");
+
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t bg-background">
       <div className="flex items-center justify-between px-2 py-2 sm:px-4 sm:py-2.5 max-w-4xl mx-auto">
@@ -76,6 +81,7 @@ export const InvitationToolbar = ({
         <div className="flex items-center gap-1.5 sm:gap-2">
           {inviteId && (
             <Button
+              className="button-rounded"
               variant="outline"
               size="icon-lg"
               onClick={onShare}
@@ -85,13 +91,18 @@ export const InvitationToolbar = ({
             </Button>
           )}
 
-          <Button type="submit" form="invitation-form" disabled={isSubmitting}>
+          <Button
+            className="rounded-full"
+            type="submit"
+            form="invitation-form"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? (
               <span className="flex items-center gap-2">
                 <Spinner className="h-4 w-4" />
               </span>
             ) : (
-              "Save"
+              t("SAVE")
             )}
           </Button>
         </div>

@@ -1,57 +1,124 @@
 {
   "HOMEPAGE": {
     "HERO": {
-      "TITLE": "Twórz zaproszenia, które żyją.",
-      "SUBTITLE": "Wybierz styl, wyślij zaproszenie, sprawdź, kto przyjdzie, kto nie (i kto jeszcze się zastanawia).",
-      "CTA": "Zaproś ze stylem"
+      "TITLE": "Zaproszenia zbyt piękne, by je ignorować.",
+      "SUBTITLE": "Wybierz styl, wyślij zaproszenie, dowiedz się, kto przyjdzie, kto nie (i kto żałuje).",
+      "CTA": "Zapraszaj ze stylem"
     },
     "FEATURES": {
       "TITLE": "Funkcje, które rządzą",
-      "SUBTITLE": "Dlaczego zadowalać się zwykłym zaproszeniem, skoro możesz stworzyć dzieło sztuki?",
+      "SUBTITLE": "Czemu zadowalać się zwykłym zaproszeniem, skoro możesz stworzyć arcydzieło?",
       "FEATURE1": {
-        "TITLE": "Dopasuj do siebie",
-        "COPY": "Dopasuj swoje zaproszenie jak chcesz: wybierz kolory, czcionki i idealny wygląd dla siebie."
+        "TITLE": "Dostosuj",
+        "COPY": "Dostosuj swoje zaproszenie jak chcesz: wybierz kolory, czcionki i idealny wygląd dla siebie."
       },
       "FEATURE2": {
         "TITLE": "Wybierz emoji",
-        "COPY": "Postaw na emoji, które robi największe wrażenie, bo jedno emoji mówi więcej niż tysiąc słów."
+        "COPY": "Wybierz emoji, które najbardziej robi wrażenie, bo jedno emoji mówi więcej niż tysiąc słów."
       },
       "FEATURE3": {
         "TITLE": "Zarządzaj odpowiedziami jak prawdziwy szef",
-        "COPY": "Kto odpowiada? Ilu przyjaciół zabiorą? A ile małych szkrabów? Nic nie zostawiamy przypadkowi: to Ty decydujesz, kto zasługuje na obecność, kto może przyprowadzić znajomych, a czy maluchy są mile widziane."
+        "COPY": "Kto odpowiada? Ilu przyjaciół zabiera? A ile dobrze wychowanych dzieci? Tutaj nic nie jest pozostawione przypadkowi: to Ty decydujesz, kto zasługuje na przyjście na imprezę, kto może przyprowadzić towarzystwo i czy maluchy są mile widziane.",
+        "EXAMPLE1": "Lorenzo",
+        "EXAMPLE2": "Emma",
+        "GUEST": "Gość",
+        "BABY": "Dzieci",
+        "COMING": "Potwierdzony"
+      },
+      "FOOTER": {
+        "COPY1": "A potem? Udostępnij swoje zaproszenie światu, wszędzie,",
+        "COPY2": "jak wiralowy mem."
       }
     },
     "CARDS": {
       "1": {
-        "NAME": "Oweenowa impreza",
-        "LOCATION": "Nawiedzony Dwór"
+        "NAME": "Halloween Hunting",
+        "LOCATION": "Dom nawiedzony"
       },
       "2": {
-        "NAME": "Impreza Świąteczna",
-        "LOCATION": "Zimowa Chata"
+        "NAME": "Impreza świąteczna",
+        "LOCATION": "Biegun Północny"
       },
       "3": {
-        "NAME": "Impreza sylwestrowa",
-        "LOCATION": "Sala Skyline"
+        "NAME": "Sylwester",
+        "LOCATION": "Mój dom"
       }
     }
   },
   "COMMON": {
     "LOGIN": "Zaloguj się",
-    "GOOGLE": "Zaloguj się przez Google",
     "LOGINTOCONTINUE": "Zaloguj się, aby kontynuować",
-    "FACEBOOK": "Zaloguj się przez Facebook"
+    "GOOGLE": "Zaloguj się przez Google",
+    "FACEBOOK": "Zaloguj się przez Facebooka"
   },
   "PROFILE": {
     "NAME": "Pełne imię i nazwisko"
   },
   "ERRORS": {
-    "INVITE_LIMIT_REACHED": "Hai raggiunto il massimo numero di inviti che puoi creare"
+    "INVITE_LIMIT_REACHED": "Osiągnąłeś maksymalną liczbę zaproszeń, które możesz utworzyć"
   },
   "SUCCESS": {
     "INVITE": {
-      "CREATED": "Invito creato",
-      "UPDATED": "Invito aggiornato"
+      "CREATED": "Zaproszenie utworzone",
+      "UPDATED": "Zaproszenie zaktualizowane"
+    }
+  },
+  "PRIVATE": {
+    "NAVBAR": {
+      "MYINVITES": "Moje zaproszenia",
+      "PROFILE": "Profil",
+      "LOGOUT": "Wyloguj się"
+    },
+    "HEADER": {
+      "INVITES": "Zaproszenia",
+      "CREATE": "Utwórz zaproszenie",
+      "USED": "{count, plural, =0 {0 z {maxInvites} zaproszeń} =1 {1 z {maxInvites} zaproszeń} other {# z {maxInvites} zaproszeń}}",
+      "REMAINING": "{remainingSlots, plural, =0 {pozostało} =1 {pozostało} other {pozostało}}"
+    },
+    "EMPTY": {
+      "TITLE": "Brak utworzonych zaproszeń",
+      "COPY": "Utwórz swoje pierwsze zaproszenie",
+      "CREATE": "Utwórz zaproszenie"
+    },
+    "PROFILE": {
+      "TITLE": "Ustawienia",
+      "PROFILE": "Profil",
+      "COPY-PROFILE": "Zaktualizuj swoje informacje",
+      "FULL-NAME": "Pełne imię i nazwisko",
+      "SAVE": "Zapisz",
+      "LANG-REGION": "Język",
+      "LANG-COPY": "Wybierz preferowany język",
+      "DANGER": "Strefa niebezpieczeństwa",
+      "DANGER-COPY": "Niezmienialne działania dla Twojego konta",
+      "DELETE": "Usuń konto",
+      "DELETE-COPY": "Trwale usuń swoje konto i wszystkie dane. Ta akcja jest nieodwracalna.",
+      "DELETE-CONF": "Czy na pewno chcesz usunąć konto? Wszystkie Twoje dane i zaproszenia zostaną trwale usunięte. Tej akcji nie można cofnąć."
+    },
+    "INVITE": {
+      "STATS": "Statystyki",
+      "EDIT": "Edytuj",
+      "SHARE": "utworzone z SMOOU",
+      "SHARE-DIALOG-TITLE": "Link do udostępnienia",
+      "SHARE-DIALOG-COPY": "Każdy, kto ma ten link, zobaczy Twoje zaproszenie",
+      "SHARE-DIALOG-CLOSE": "Zamknij",
+      "BUILDER": {
+        "NOTES": "Notatki/Opis",
+        "CUSTOMIZE-TITLE": "Dostosuj zaproszenie",
+        "RSVP-REQ": "Odpowiedź wymagana",
+        "RSVP-DESC": "Goście muszą potwierdzić udział",
+        "GUEST-LIMIT": "Limit gości",
+        "GUEST-MAX": "Maksymalna liczba gości, których może przynieść każdy zaproszony",
+        "ADULTS": "Dorośli",
+        "BABY-SEP": "Licz oddzielnie dzieci",
+        "BABY-MAX": "Maksymalna liczba dzieci, które może przynieść każdy zaproszony",
+        "BABY-LABEL": "Dzieci",
+        "NAME": "Nazwisko",
+        "SELECT-DATE": "Wybierz datę",
+        "START-TIME": "Godzina rozpoczęcia",
+        "END-TIME": "Godzina zakończenia",
+        "LOCATION": "Lokalizacja",
+        "SAVE": "Zapisz"
+      }
     }
   }
 }

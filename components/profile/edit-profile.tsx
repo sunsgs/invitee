@@ -3,6 +3,7 @@
 import { authClient, useSession } from "@/lib/auth-client";
 import { profileSchema, ProfileSchema } from "@/validation/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
@@ -13,6 +14,7 @@ import { Spinner } from "../ui/spinner";
 export default function EditProfile(props: { session?: any }) {
   const { data, isPending } = useSession();
   const session = data || props.session;
+  const t = useTranslations("PRIVATE.PROFILE");
 
   const {
     register,
@@ -51,7 +53,7 @@ export default function EditProfile(props: { session?: any }) {
       noValidate
     >
       <div className="space-y-2">
-        <Label htmlFor="name">Full Name</Label>
+        <Label htmlFor="name"> {t("FULL-NAME")}</Label>
         <Input
           id="name"
           type="text"
@@ -68,7 +70,7 @@ export default function EditProfile(props: { session?: any }) {
       <Button
         type="submit"
         disabled={isSubmitting || isPending}
-        className="w-fit"
+        className="w-fit button-rounded"
       >
         {isSubmitting ? <Spinner /> : "Save"}
       </Button>

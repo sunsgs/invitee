@@ -1,4 +1,3 @@
-import { Providers } from "@/providers";
 import { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
@@ -32,7 +31,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           disableTransitionOnChange
         >
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <Providers>{children}</Providers>
+            {children}
           </NextIntlClientProvider>
           <Toaster position="top-center" />
         </ThemeProvider>

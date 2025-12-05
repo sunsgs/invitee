@@ -18,7 +18,16 @@
       },
       "FEATURE3": {
         "TITLE": "Gestisci le risposte come un vero boss",
-        "COPY": "Chi risponde? Quanti amici portano? E quanti pargoli con pedigree? Qui non si lascia niente al caso: decidi tu chi merita di venire alla festa, chi può portare compagnia e se i cuccioli sono benvenuti."
+        "COPY": "Chi risponde? Quanti amici portano? E quanti pargoli con pedigree? Qui non si lascia niente al caso: decidi tu chi merita di venire alla festa, chi può portare compagnia e se i cuccioli sono benvenuti.",
+        "EXAMPLE1": "Lorenzo",
+        "EXAMPLE2": "Emma",
+        "GUEST": "Invitato",
+        "BABY": "Bambini",
+        "COMING": "Confermato"
+      },
+      "FOOTER": {
+        "COPY1": " E poi? Condividi il tuo invito nel mondo, ovunque,",
+        "COPY2": "come un meme virale."
       }
     },
     "CARDS": {
@@ -52,6 +61,64 @@
     "INVITE": {
       "CREATED": "Invito creato",
       "UPDATED": "Invito aggiornato"
+    }
+  },
+  "PRIVATE": {
+    "NAVBAR": {
+      "MYINVITES": "I miei inviti",
+      "PROFILE": "Profilo",
+      "LOGOUT": "Log out"
+    },
+    "HEADER": {
+      "INVITES": "Inviti",
+      "CREATE": "Crea invito",
+      "USED": "{count, plural, =0 {0 of {maxInvites} inviti} =1 {1 of {maxInvites} inviti} other {# of {maxInvites} inviti}}",
+      "REMAINING": "{remainingSlots, plural, =0 {rimasti} =1 {rimasto} other {rimasti}}"
+    },
+    "EMPTY": {
+      "TITLE": "Nessun invito creato",
+      "COPY": "Crea il tuo primo invito",
+      "CREATE": "Crea invito"
+    },
+    "PROFILE": {
+      "TITLE": "Impostazioni",
+      "PROFILE": "Profilo",
+      "COPY-PROFILE": "Aggiorna le tue informazioni",
+      "FULL-NAME": "Nome completo",
+      "SAVE": "Salva",
+      "LANG-REGION": "Lingua",
+      "LANG-COPY": "Scegli il tuo linguaggio preferito",
+      "DANGER": "Zona pericolosa",
+      "DANGER-COPY": "Azioni irreversibili per il tuo accoutnt",
+      "DELETE": "Cancella account",
+      "DELETE-COPY": "Cancella permanentemente il tuo account e tutti i dati. Questa azione non può essere annullata.",
+      "DELETE-CONF": "Sei sicuro di voler cancellare il tuo account? Tutti i tuoi dati e inviti saranno cancellati permanentemente. Questa azione non può essere annullata."
+    },
+    "INVITE": {
+      "STATS": "Stats",
+      "EDIT": "Modifica",
+      "SHARE": "creato con SMOOU",
+      "SHARE-DIALOG-TITLE": "Link da condividere",
+      "SHARE-DIALOG-COPY": "Chiunque avrà questo link vedrà il tuo invito",
+      "SHARE-DIALOG-CLOSE": "Chiudi",
+      "BUILDER": {
+        "NOTES": "Note/Descrizione",
+        "CUSTOMIZE-TITLE": "Personalizza il tuo invito",
+        "RSVP-REQ": "Risposta obbligatoria",
+        "RSVP-DESC": "Gli invitati devono confermare la partecipazione",
+        "GUEST-LIMIT": "Limite invitati",
+        "GUEST-MAX": "Massimo numero di ospiti ogni invitato può portare",
+        "ADULTS": "Adulti",
+        "BABY-SEP": "Conta bambini in maniera separata",
+        "BABY-MAX": "Massimo numero di bambini ogni invitato può portare",
+        "BABY-LABEL": "Bambini",
+        "NAME": "Nome",
+        "SELECT-DATE": "Seleziona una data",
+        "START-TIME": "Orario di inizio",
+        "END-TIME": "Orario di fine",
+        "LOCATION" :"Location",
+        "SAVE" : "Salva"
+      }
     }
   }
 }
